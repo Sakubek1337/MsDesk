@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckMenuItem?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="500.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="700.0">
+         <fill>
+            <LinearGradient endX="0.9238095238095239" endY="0.9" startX="1.0" startY="0.06190476190476191">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.46722710132598877" green="0.667712390422821" blue="0.8552631735801697" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <Rectangle fill="#60768a" height="40.0" layoutX="170.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="530.0" />
+      <Rectangle height="70.0" layoutY="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="170.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0" startX="0.8333333333333334" startY="0.23333333333333334">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.11999999731779099" green="0.6802349090576172" blue="1.0" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <ProgressBar fx:id="actPrg" layoutX="4.0" layoutY="138.0" prefHeight="17.0" prefWidth="163.0" progress="0.0" />
+      <AnchorPane layoutX="170.0" layoutY="30.0" prefHeight="470.0" prefWidth="530.0">
+         <children>
+            <Rectangle fill="#8398ab" height="76.0" layoutY="11.0" stroke="BLACK" strokeType="OUTSIDE" width="530.0" />
+            <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="15.0" layoutY="100.0" prefHeight="350.0" prefWidth="500.0">
+              <content>
+                <AnchorPane fx:id="tasks_content" minHeight="0.0" minWidth="0.0" prefHeight="340.0" prefWidth="500.0" />
+              </content>
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+            </ScrollPane>
+            <Button layoutX="450.0" layoutY="52.0" mnemonicParsing="false" onAction="#add" text="Add task">
+               <font>
+                  <Font size="11.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <TextField fx:id="desc" layoutX="73.0" layoutY="52.0" prefHeight="25.0" prefWidth="355.0" promptText="Description...">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor></TextField>
+            <ColorPicker fx:id="color_picker" editable="true" layoutX="15.0" layoutY="52.0" prefHeight="25.0" prefWidth="52.0">
+               <value>
+                  <Color red="0.9473684430122375" green="0.23245614767074585" blue="0.23245614767074585" />
+               </value>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ColorPicker>
+            <MenuButton fx:id="menu" layoutX="289.0" layoutY="21.0" mnemonicParsing="false" text="Easy">
+               <items>
+                  <CheckMenuItem fx:id="easy" mnemonicParsing="false" onAction="#setDifficulty" text="Easy" />
+                  <CheckMenuItem fx:id="medium" mnemonicParsing="false" onAction="#setDifficulty" text="Medium" />
+                  <CheckMenuItem fx:id="hard" mnemonicParsing="false" onAction="#setDifficulty" text="Hard" />
+                  <CheckMenuItem fx:id="expert" mnemonicParsing="false" onAction="#setDifficulty" text="Expert" />
+                  <CheckMenuItem fx:id="imp" mnemonicParsing="false" onAction="#setDifficulty" text="Impossible" />
+               </items>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </MenuButton>
+            <Label layoutX="228.0" layoutY="25.0" prefHeight="17.0" prefWidth="89.0" text="Difficulty :" />
+            <Label layoutX="376.0" layoutY="34.0" prefHeight="17.0" prefWidth="136.0" text="length : ( 3 - 45 )" />
+         </children>
+      </AnchorPane>
+      <Rectangle fill="WHITE" height="40.0" layoutX="620.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+      <Line endX="170.0" endY="500.0" startX="170.0" stroke="#4a4747" strokeWidth="2.0" />
+      <Line endY="100.0" startX="170.0" startY="100.0" stroke="#434141" strokeWidth="2.0" />
+      <Line endX="700.0" endY="40.0" startX="170.0" startY="40.0" stroke="#4a4747" strokeWidth="2.0" />
+      <Label alignment="CENTER" layoutX="4.0" layoutY="110.0" prefHeight="17.0" prefWidth="163.0" text="Daily activity">
+         <font>
+            <Font name="Century Gothic" size="17.0" />
+         </font>
+      </Label>
+      <Line endY="170.0" startX="170.0" startY="170.0" stroke="#434141" strokeWidth="2.0" />
+      <Label fx:id="timeLabel" alignment="CENTER_RIGHT" layoutX="557.0" layoutY="4.0" prefHeight="32.0" prefWidth="136.0" text="01:58:45">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Line endX="610.0" endY="30.0" layoutX="10.0" layoutY="10.0" startX="610.0" startY="-10.0" stroke="#4a4747" strokeWidth="2.0" />
+   </children>
+</AnchorPane>
