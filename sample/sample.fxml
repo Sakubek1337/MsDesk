@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.CheckMenuItem?>
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.paint.Color?>
@@ -17,46 +20,86 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="500.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="700.0">
-         <fill>
-            <LinearGradient endX="0.9238095238095239" endY="0.9" startX="1.0" startY="0.06190476190476191">
-               <stops>
-                  <Stop>
-                     <color>
-                        <Color red="0.46722710132598877" green="0.667712390422821" blue="0.8552631735801697" />
-                     </color>
-                  </Stop>
-                  <Stop offset="1.0">
-                     <color>
-                        <Color red="1.0" green="1.0" blue="1.0" />
-                     </color>
-                  </Stop>
-               </stops>
-            </LinearGradient>
-         </fill>
-      </Rectangle>
-      <Rectangle fill="#60768a" height="40.0" layoutX="170.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="530.0" />
-      <Rectangle height="70.0" layoutY="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="170.0">
-         <fill>
-            <LinearGradient endX="1.0" endY="1.0" startX="0.8333333333333334" startY="0.23333333333333334">
-               <stops>
-                  <Stop>
-                     <color>
-                        <Color red="0.11999999731779099" green="0.6802349090576172" blue="1.0" />
-                     </color>
-                  </Stop>
-                  <Stop offset="1.0">
-                     <color>
-                        <Color red="1.0" green="1.0" blue="1.0" />
-                     </color>
-                  </Stop>
-               </stops>
-            </LinearGradient>
-         </fill>
-      </Rectangle>
-      <ProgressBar fx:id="actPrg" layoutX="4.0" layoutY="138.0" prefHeight="17.0" prefWidth="163.0" progress="0.0" />
+      <AnchorPane prefHeight="500.0" prefWidth="700.0">
+         <children>
+            <AnchorPane prefHeight="500.0" prefWidth="700.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="500.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="700.0">
+               <fill>
+                  <LinearGradient endX="0.9238095238095239" endY="0.9" startX="1.0" startY="0.06190476190476191">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.46722710132598877" green="0.667712390422821" blue="0.8552631735801697" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Rectangle>
+            <Rectangle fill="#60768a" height="40.0" layoutX="170.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="530.0" />
+            <Rectangle height="70.0" layoutY="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="170.0">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0" startX="0.8333333333333334" startY="0.23333333333333334">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.11999999731779099" green="0.6802349090576172" blue="1.0" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Rectangle>
+            <ProgressBar fx:id="actPrg" layoutX="4.0" layoutY="138.0" prefHeight="17.0" prefWidth="163.0" progress="0.0" style="-fx-padding: 3;">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </ProgressBar>
+            <Rectangle fill="WHITE" height="30.0" layoutX="620.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+            <Line endX="170.0" endY="500.0" startX="170.0" stroke="#4a4747" strokeWidth="2.0" />
+            <Line endY="100.0" startX="170.0" startY="100.0" stroke="#434141" strokeWidth="2.0" />
+            <Line endX="700.0" endY="40.0" startX="170.0" startY="40.0" stroke="#4a4747" strokeWidth="2.0" />
+            <Label alignment="CENTER" layoutX="4.0" layoutY="110.0" prefHeight="17.0" prefWidth="163.0" text="Daily activity">
+               <font>
+                  <Font name="Century Gothic" size="17.0" />
+               </font>
+            </Label>
+            <Line endY="170.0" startX="170.0" startY="170.0" stroke="#434141" strokeWidth="2.0" />
+            <Label fx:id="timeLabel" alignment="CENTER" layoutX="620.0" prefHeight="30.0" prefWidth="80.0" text="01:58:45">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" layoutX="5.0" layoutY="5.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+            <Label fx:id="nickLabel" layoutX="64.0" layoutY="12.0" prefHeight="17.0" prefWidth="97.0" text="Nickname" underline="true" />
+            <Label fx:id="lvlLabel" layoutX="64.0" layoutY="33.0" prefHeight="17.0" prefWidth="97.0" text="Level">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+            </Label>
+            <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#143a5e" height="5.0" layoutX="64.0" layoutY="53.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+            <Rectangle fx:id="levelPrg" arcHeight="10.0" arcWidth="10.0" fill="AQUA" height="5.0" layoutX="64.0" layoutY="53.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
+            <Button fx:id="adminMenuB" layoutX="516.0" mnemonicParsing="false" onAction="#showAdminMenu" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 0; -fx-background-color: #000; -fx-border-radius: 0; -fx-border-width: 1; -fx-border-color: #000;" text="Admin Tools" textFill="WHITE" />
+            <Label fx:id="profN" alignment="CENTER" layoutX="5.0" layoutY="5.0" prefHeight="50.0" prefWidth="50.0" text="S" textFill="#838181">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="32.0" />
+               </font>
+            </Label>
+            <Button fx:id="sqlMenuButton" layoutX="383.0" mnemonicParsing="false" onAction="#showSQLMenu" prefHeight="30.0" prefWidth="127.0" style="-fx-background-radius: 0; -fx-background-color: #000; -fx-border-radius: 0; -fx-border-width: 1; -fx-border-color: #000;" text="SQL Command Line" textFill="WHITE" />
+         </children>
+      </AnchorPane>
       <AnchorPane layoutX="170.0" layoutY="30.0" prefHeight="470.0" prefWidth="530.0">
          <children>
             <Rectangle fill="#8398ab" height="76.0" layoutY="11.0" stroke="BLACK" strokeType="OUTSIDE" width="530.0" />
@@ -76,7 +119,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <TextField fx:id="desc" layoutX="73.0" layoutY="52.0" prefHeight="25.0" prefWidth="355.0" promptText="Description...">
+            <TextField fx:id="descriptionTF" layoutX="73.0" layoutY="52.0" prefHeight="25.0" prefWidth="355.0" promptText="Description...">
                <cursor>
                   <Cursor fx:constant="TEXT" />
                </cursor></TextField>
@@ -101,24 +144,64 @@
                </cursor>
             </MenuButton>
             <Label layoutX="228.0" layoutY="25.0" prefHeight="17.0" prefWidth="89.0" text="Difficulty :" />
-            <Label layoutX="376.0" layoutY="34.0" prefHeight="17.0" prefWidth="136.0" text="length : ( 3 - 45 )" />
+            <Rectangle fx:id="errorLengthRect" arcHeight="5.0" arcWidth="5.0" fill="#ff8080" height="22.0" layoutX="376.0" layoutY="23.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="97.0" />
+            <Label fx:id="lengthLabel" alignment="CENTER" layoutX="376.0" layoutY="24.0" prefHeight="19.0" prefWidth="97.0" style="-fx-border-color: RED; -fx-border-width: 0;" text="length : ( 3 - 51 )" />
          </children>
       </AnchorPane>
-      <Rectangle fill="WHITE" height="40.0" layoutX="620.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-      <Line endX="170.0" endY="500.0" startX="170.0" stroke="#4a4747" strokeWidth="2.0" />
-      <Line endY="100.0" startX="170.0" startY="100.0" stroke="#434141" strokeWidth="2.0" />
-      <Line endX="700.0" endY="40.0" startX="170.0" startY="40.0" stroke="#4a4747" strokeWidth="2.0" />
-      <Label alignment="CENTER" layoutX="4.0" layoutY="110.0" prefHeight="17.0" prefWidth="163.0" text="Daily activity">
-         <font>
-            <Font name="Century Gothic" size="17.0" />
-         </font>
-      </Label>
-      <Line endY="170.0" startX="170.0" startY="170.0" stroke="#434141" strokeWidth="2.0" />
-      <Label fx:id="timeLabel" alignment="CENTER_RIGHT" layoutX="557.0" layoutY="4.0" prefHeight="32.0" prefWidth="136.0" text="01:58:45">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Line endX="610.0" endY="30.0" layoutX="10.0" layoutY="10.0" startX="610.0" startY="-10.0" stroke="#4a4747" strokeWidth="2.0" />
+      <AnchorPane fx:id="adminMenu" disable="true" layoutX="170.0" layoutY="40.0" prefHeight="80.0" prefWidth="530.0" visible="false">
+         <children>
+            <Rectangle fill="#726e6e" height="80.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="530.0" />
+            <Button alignment="CENTER" layoutX="14.0" layoutY="45.0" mnemonicParsing="false" onAction="#adminAddPoints" text="Add points" />
+            <Button alignment="CENTER" layoutX="107.0" layoutY="45.0" mnemonicParsing="false" onAction="#adminDeleteUser" text="Delete user" />
+            <Button alignment="CENTER" layoutX="201.0" layoutY="45.0" mnemonicParsing="false" onAction="#adminAddUser" text="Add user" />
+            <Button fx:id="adminTakeAdminB" alignment="CENTER" layoutX="282.0" layoutY="45.0" mnemonicParsing="false" onAction="#adminTakeAdmin" text="Take admin" />
+            <Button fx:id="adminGiveAdminB" alignment="CENTER" layoutX="364.0" layoutY="45.0" mnemonicParsing="false" onAction="#adminGiveAdmin" prefHeight="25.0" prefWidth="78.0" text="Give admin" />
+            <Button alignment="CENTER" layoutX="466.0" layoutY="45.0" mnemonicParsing="false" onAction="#adminGift" text="Gift" />
+            <TextField fx:id="adminAddTF" layoutX="22.0" layoutY="14.0" prefHeight="25.0" prefWidth="59.0" text="100" />
+            <TextField layoutX="109.0" layoutY="14.0" prefHeight="25.0" prefWidth="73.0" promptText="name" />
+            <TextField layoutX="197.0" layoutY="14.0" prefHeight="25.0" prefWidth="73.0" promptText="name" />
+            <TextField layoutX="364.0" layoutY="14.0" prefHeight="25.0" prefWidth="73.0" promptText="name" />
+            <TextField layoutX="284.0" layoutY="14.0" prefHeight="25.0" prefWidth="73.0" promptText="name" />
+            <TextField fx:id="adminGiftTF" layoutX="447.0" layoutY="14.0" prefHeight="25.0" prefWidth="73.0" promptText="name" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="sqlMenu" disable="true" layoutX="170.0" layoutY="40.0" prefHeight="235.0" prefWidth="530.0" visible="false">
+         <children>
+            <Rectangle fill="#726e6e" height="235.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="530.0" />
+            <TextArea fx:id="inputArea" layoutX="14.0" layoutY="31.0" prefHeight="25.0" prefWidth="500.0" />
+            <CheckBox layoutX="14.0" layoutY="6.0" mnemonicParsing="false" text="SELECT" />
+            <CheckBox layoutX="265.0" layoutY="6.0" mnemonicParsing="false" text="INSERT / UPDATE / CREATE / DROP / ALTER" />
+            <TextArea layoutX="14.0" layoutY="92.0" prefHeight="116.0" prefWidth="500.0" />
+            <Label layoutX="14.0" layoutY="75.0" text="Output:" />
+         </children>
+      </AnchorPane>
+      <AnchorPane disable="true" prefHeight="500.0" prefWidth="700.0" visible="false">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="500.0" stroke="BLACK" strokeType="INSIDE" width="700.0">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.45230263471603394" green="0.7373903393745422" blue="0.9868420958518982" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.07216494845360825">
+                           <color>
+                              <Color red="0.45230263471603394" green="0.7373903393745422" blue="0.9868420958518982" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Rectangle>
+            <Rectangle arcHeight="30.0" arcWidth="30.0" fill="WHITE" height="200.0" layoutX="250.0" layoutY="105.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

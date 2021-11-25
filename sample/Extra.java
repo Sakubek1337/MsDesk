@@ -4,7 +4,8 @@ import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.ProgressBar;
 
-public class Extra {
+public class Extra extends Levels{
+
     public void setDiff(CheckMenuItem item, MenuButton menuButton){
         String name = item.getText();
         CheckMenuItem easy = (CheckMenuItem) (menuButton.getItems().get(0));
@@ -84,26 +85,35 @@ public class Extra {
         return s;
     }
 
-    public void addPoints(ProgressBar prg, String d){
+    public Integer addPoints(ProgressBar prg, String d, String nick, int score){
         switch (d){
             case "⭐":
                 prg.setProgress(prg.getProgress() + 0.05);
+                score += 100;
                 break;
             case "⭐⭐":
                 prg.setProgress(prg.getProgress() + 0.1);
+                score += 200;
                 break;
             case "⭐⭐⭐":
                 prg.setProgress(prg.getProgress() + 0.35);
+                score += 700;
                 break;
             case "⭐⭐⭐⭐":
                 prg.setProgress(prg.getProgress() + 0.65);
+                score += 1400;
                 break;
             case "⭐⭐⭐⭐⭐":
-                prg.setProgress(prg.getProgress() + 1.0);
+                prg.setProgress(prg.getProgress() + 0.9);
+                score += 2000;
                 break;
         }
 
         if (prg.getProgress() >= 1.0)
             prg.setStyle("-fx-accent: #0f0");
+
+        return score;
     }
+
+
 }
