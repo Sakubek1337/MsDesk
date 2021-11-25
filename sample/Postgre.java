@@ -3,9 +3,9 @@ package sample;
 import java.sql.*;
 
 public class Postgre{
-    protected  String jdbcURL = "jdbc:postgresql://ec2-52-48-137-75.eu-west-1.compute.amazonaws.com:5432/d3g3g6r529vc82";
-    protected String username = "ncxfuopnggexwd";
-    protected String password = "9580b37322a2510577a6558369ebe941fc87eac98eb4328aa9d5b23ad1c2f802";
+    protected String jdbcURL = "jdbc:postgresql:host:port/database";
+    protected String username = "username";
+    protected String password = "password";
 
     Connection connection;
 
