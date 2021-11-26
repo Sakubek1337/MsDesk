@@ -14,12 +14,6 @@ public class Admin extends Extra{
         return admins.contains(name);
     }
 
-
-    void adminAddPointsC(String name, int n) {
-        sql("Update", name, n);
-        System.out.println("Points added");
-    }
-
     void adminAddUserC(String name) {
 
     }

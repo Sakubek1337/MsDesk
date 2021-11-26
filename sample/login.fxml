@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="mainPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Login">
+   <children>
+      <Rectangle height="500.0" stroke="BLACK" strokeType="INSIDE" width="700.0">
+         <fill>
+            <LinearGradient endX="0.08571428571428573" endY="0.6142857142857143" startX="0.17142857142857143" startY="0.18095238095238095">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.48148149251937866" green="0.8790123462677002" blue="1.0" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <Rectangle arcHeight="30.0" arcWidth="30.0" fill="#d9e0e8" height="200.0" layoutX="250.0" layoutY="150.0" stroke="#16757c" strokeType="INSIDE" strokeWidth="4.0" width="200.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="79.0" layoutX="192.0" layoutY="55.0" stroke="BLACK" strokeType="INSIDE" width="317.0" />
+      <AnchorPane fx:id="errorPane" prefHeight="500.0" prefWidth="700.0" visible="false">
+         <children>
+            <Rectangle arcHeight="35.0" arcWidth="35.0" fill="#d9e0e8" height="71.0" layoutX="453.0" layoutY="195.0" stroke="#16757c" strokeType="INSIDE" strokeWidth="2.0" width="110.0" />
+            <Label alignment="CENTER" layoutX="453.0" layoutY="195.0" prefHeight="71.0" prefWidth="110.0" text="Username length&#10;(4-20)&#10;Password length&#10;(4-25)" textAlignment="CENTER" textFill="#172f32">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="loadingPane" prefHeight="500.0" prefWidth="700.0" visible="false">
+         <children>
+            <Circle fx:id="circle1" fill="WHITE" layoutX="310.0" layoutY="412.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="circle3" fill="WHITE" layoutX="350.0" layoutY="412.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="circle2" fill="WHITE" layoutX="330.0" layoutY="412.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="circle4" fill="WHITE" layoutX="370.0" layoutY="412.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="circle5" fill="WHITE" layoutX="390.0" layoutY="412.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+         </children>
+      </AnchorPane>
+      <TextField fx:id="loginTF" layoutX="276.0" layoutY="199.0" onMouseClicked="#clearAll" />
+      <CheckBox fx:id="register" layoutX="314.0" layoutY="363.0" mnemonicParsing="false" text="Register" />
+      <Button layoutX="322.0" layoutY="300.0" mnemonicParsing="false" onAction="#signIn" text="Log in" />
+      <PasswordField fx:id="passField" layoutX="276.0" layoutY="256.0" onMouseClicked="#clearAll" />
+      <Label alignment="CENTER" layoutX="200.0" layoutY="55.0" text="MS Table">
+         <font>
+            <Font name="Forte" size="71.0" />
+         </font>
+      </Label>
+      <Label layoutX="210.0" layoutY="430.0" text="By Mambetkadyrov">
+         <font>
+            <Font name="Forte" size="33.0" />
+         </font>
+      </Label>
+      <Label layoutX="273.0" layoutY="176.0" text="Username:">
+         <font>
+            <Font name="Forte" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="273.0" layoutY="231.0" text="Password:">
+         <font>
+            <Font name="Forte" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="wrongName" layoutX="344.0" layoutY="223.0" text="Incorrect username" textFill="RED" visible="false">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <Label fx:id="wrongPass" layoutX="344.0" layoutY="281.0" text="Incorrect password" textFill="RED" visible="false">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

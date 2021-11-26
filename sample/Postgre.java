@@ -1,11 +1,12 @@
 package sample;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class Postgre{
-    protected String jdbcURL = "jdbc:postgresql:host:port/database";
-    protected String username = "username";
-    protected String password = "password";
+    protected  String jdbcURL = "jdbc:postgresql://ec2-52-48-137-75.eu-west-1.compute.amazonaws.com:5432/d3g3g6r529vc82";
+    protected String username = "ncxfuopnggexwd";
+    protected String password = "9580b37322a2510577a6558369ebe941fc87eac98eb4328aa9d5b23ad1c2f802";
 
     Connection connection;
 
@@ -50,7 +51,7 @@ public class Postgre{
 
     public String sql(String q, String nick){
 
-        String r = "No result";
+        String r = "0";
 
         if (q.equals("getScore")) {
             try {
@@ -69,6 +70,119 @@ public class Postgre{
             }
         }
         return r;
+    }
+
+    public void makeOnline(String nickname){
+        try {
+            if (connection == null)
+                connection = DriverManager.getConnection(jdbcURL, username, password);
+            Statement statement = connection.createStatement();
+
+            String query = "UPDATE users SET is_online = 1 WHERE nick = '" + nickname +  "'";
+            statement.executeUpdate(query);
+
+        } catch (SQLException e) {
+            System.out.println("Error in connecting to Postgresql server");
+            e.printStackTrace();
+        }
+    }
+
+    public void makeOffline(String nickname){
+        try {
+            if (connection == null)
+                connection = DriverManager.getConnection(jdbcURL, username, password);
+            Statement statement = connection.createStatement();
+
+            String query = "UPDATE users SET is_online = 0 WHERE nick = '" + nickname +  "'";
+            statement.executeUpdate(query);
+
+        } catch (SQLException e) {
+            System.out.println("Error in connecting to Postgresql server");
+            e.printStackTrace();
+        }
+    }
+
+    public ArrayList<String> getOnlinePlayers(String nickname){
+        ArrayList<String> players = new ArrayList<>();
+        try {
+            if (connection == null)
+                connection = DriverManager.getConnection(jdbcURL, username, password);
+            Statement statement = connection.createStatement();
+
+            String query = "SELECT nick FROM users WHERE is_online = 1 AND nick != '" + nickname +  "'";
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                String nick = resultSet.getString("nick");
+                players.add(nick);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error in connecting to Postgresql server");
+            e.printStackTrace();
+        }
+        return players;
+    }
+
+    public void addUser(String nickname, String pass) throws SQLException {
+        if (connection == null)
+            connection = DriverManager.getConnection(jdbcURL, username, password);
+        System.out.println("Connected to Postgresql server successfully");
+        String inserting= "INSERT INTO users VALUES ('" + nickname + "', '0', '" + pass + "', 0)";
+        Statement statement = connection.createStatement();
+        statement.executeUpdate(inserting);
+    }
+
+    public Boolean checkInternet(){
+        try {
+            if (connection == null)
+                connection = DriverManager.getConnection(jdbcURL, username, password);
+            Statement statement = connection.createStatement();
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Error in connecting to Postgresql server");
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public Boolean checkUser(String nickname){
+        try {
+            if (connection == null)
+                connection = DriverManager.getConnection(jdbcURL, username, password);
+            Statement statement = connection.createStatement();
+
+            String query = "SELECT nick FROM users WHERE nick = '" + nickname + "'";
+            ResultSet resultSet = statement.executeQuery(query);
+            if(resultSet.next()){
+                return true;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error in connecting to Postgresql server");
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public Boolean checkPass(String nickname, String pass){
+        try {
+            if (connection == null)
+                connection = DriverManager.getConnection(jdbcURL, username, password);
+            Statement statement = connection.createStatement();
+
+            String query = "SELECT nick, password FROM users WHERE nick = '" + nickname + "'";
+            ResultSet resultSet = statement.executeQuery(query);
+            resultSet.next();
+            String actualPass = resultSet.getString("password");
+            if (actualPass.equals(pass)){
+                return true;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error in connecting to Postgresql server");
+            e.printStackTrace();
+        }
+
+        return false;
     }
 
     public void closeConnection() throws SQLException {

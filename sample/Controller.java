@@ -4,9 +4,12 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -15,6 +18,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -24,7 +28,8 @@ import java.util.ResourceBundle;
 
 public class Controller extends Admin implements Initializable {
 
-    String nickname = "Sakubek";
+    String nickname = "";
+    String passw = "";
     int score;
 
     ArrayList<Rectangle> rects = new ArrayList<>();
@@ -37,25 +42,13 @@ public class Controller extends Admin implements Initializable {
     @FXML
     AnchorPane mainPane;
     @FXML
-    Label timeLabel;
+    Label timeLabel, lvlLabel, nickLabel, lengthLabel, profN;
     @FXML
-    Label lvlLabel;
+    AnchorPane adminMenu ,sqlMenu, playersMenu, tasksMenu;
     @FXML
-    Label nickLabel;
+    Button adminMenuB, adminGiveAdminB, adminTakeAdminB;;
     @FXML
-    Label profN;
-    @FXML
-    Label lengthLabel;
-    @FXML
-    AnchorPane adminMenu;
-    @FXML
-    AnchorPane sqlMenu;
-    @FXML
-    Button adminMenuB;
-    @FXML
-    Button adminGiveAdminB;
-    @FXML
-    Button adminTakeAdminB;
+    Button playersMenuB;
     @FXML
     ProgressBar actPrg;
     @FXML
@@ -65,32 +58,18 @@ public class Controller extends Admin implements Initializable {
     @FXML
     ColorPicker color_picker;
     @FXML
-    TextField adminAddTF;
+    TextField adminGiftTF, descriptionTF, adminAddTF;
     @FXML
-    TextField adminGiftTF;
+    TextArea inputArea, onlineTA;
     @FXML
-    TextField descriptionTF;
-    @FXML
-    TextArea inputArea;
-    @FXML
-    Rectangle levelPrg;
-    @FXML
-    Rectangle errorLengthRect;
+    Rectangle levelPrg, errorLengthRect;
     @FXML
     MenuButton menu;
     @FXML
-    CheckMenuItem easy;
-    @FXML
-    CheckMenuItem medium;
-    @FXML
-    CheckMenuItem hard;
-    @FXML
-    CheckMenuItem expert;
-    @FXML
-    CheckMenuItem imp;
+    CheckMenuItem easy, medium, hard, expert, imp;
 
     @FXML
-    void add() throws SQLException {
+    void add(){
         Rectangle rect = new Rectangle(470, 50);
         if (rects.size() < 1){
             rect.setLayoutY(10);
@@ -113,7 +92,7 @@ public class Controller extends Admin implements Initializable {
         button.setLayoutX(437);
         button.setLayoutY(rect.getLayoutY() + 5);
         button.setCursor(Cursor.HAND);
-        button.setOnAction(e -> delete(buttons.indexOf(button), "done"));
+        button.setOnAction(e -> delete(buttons.indexOf(button), false));
 
         Label label = new Label(setStars(menu));
         label.setFont(new Font(10));
@@ -147,20 +126,10 @@ public class Controller extends Admin implements Initializable {
             System.out.println(descriptionTF.getText().length());
             errorLengthRect.setVisible(true);
         }
-
-        Stage stage = (Stage) mainPane.getScene().getWindow();
-        stage.setOnCloseRequest(e -> {sql("Update", nickname, score);
-            try {
-                closeConnection();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
-        });
-
     }
 
-    void delete(int n, String type) {
-        if (type.equals("done")) {
+    void delete(int n, boolean deleting) {
+        if (!deleting) {
             score = addPoints(actPrg, labels.get(n).getText(), nickname, score);
             setLevel();
         }
@@ -182,6 +151,7 @@ public class Controller extends Admin implements Initializable {
                     rects.get(temp).setLayoutY(rects.get(temp).getLayoutY() - h);
                     buttons.get(temp).setLayoutY(buttons.get(temp).getLayoutY() - h);
                     labels.get(temp).setLayoutY(labels.get(temp).getLayoutY() - h);
+                    descriptions.get(temp).setLayoutY(descriptions.get(temp).getLayoutY() - h);
                     tasks_content.setDisable(temp != rects.size() - 1);
                     temp++;
                     scrollPane.setVvalue(vert);
@@ -219,12 +189,41 @@ public class Controller extends Admin implements Initializable {
         levelPrg.setWidth(50 * per(score));
     }
 
+    void getValues(String nick, String pass){
+        nickname = nick;
+        passw = pass;
+        profN.setText(nickname.substring(0, 1).toUpperCase());
+        nickLabel.setText(nickname);
+        score = Integer.parseInt(sql("getScore", nickname));
+
+        setLevel();
+        makeOnline(nickname);
+        addAdmin("Sakubek");
+        if(adminCheck(nickname)){
+            adminMenuB.setDisable(false);
+        }
+        if(!nickname.equals("Sakubek")){
+            adminTakeAdminB.setDisable(true);
+            adminGiveAdminB.setDisable(true);
+        }
+    }
+
     @FXML
     void showAdminMenu(){
         adminMenu.setDisable(!adminMenu.isDisable());
         adminMenu.setVisible(!adminMenu.isVisible());
         sqlMenu.setDisable(true);
         sqlMenu.setVisible(false);
+    }
+
+    @FXML
+    void showPlayersMenu(){
+        refreshPlayers();
+        playersMenu.setVisible(true);
+        playersMenu.setDisable(false);
+        tasksMenu.setDisable(true);
+        tasksMenu.setVisible(false);
+        playersMenuB.setDisable(true);
     }
 
     @FXML
@@ -236,13 +235,14 @@ public class Controller extends Admin implements Initializable {
                 score = 0;
             }
             setLevel();
-            adminAddPointsC(nickname, score);
+            sql("Update", nickname, score);
+            System.out.println("Points added");
 
         }catch(Exception e){
             if (adminAddTF.getText().equals("reset")){
                 score = 0;
                 setLevel();
-                adminAddPointsC(nickname, score);
+                sql("Update", nickname, score);
                 System.out.println("Deleted");
             }else{
                 System.out.println("Nu i kak bukvy dobavblyat?");
@@ -251,13 +251,39 @@ public class Controller extends Admin implements Initializable {
     }
 
     @FXML
+    void refreshPlayers(){
+        onlineTA.setText("* " + nickname + "\n");
+        temp = 0;
+        StringBuilder text = new StringBuilder(onlineTA.getText());
+        ArrayList<String> players = getOnlinePlayers(nickname);
+        Timeline addingTML = new Timeline(new KeyFrame(Duration.millis(10), e -> {
+            if (players.size() > 0){
+                try {
+                    text.append("* ").append(players.get(temp)).append("\n");
+                    temp++;
+                    if (temp >= players.size()) {
+                        onlineTA.setText(text.toString());
+                    }
+                } catch (Exception ex) {
+                    System.out.println("Whatever");
+                }
+            }
+        }));
+        addingTML.setCycleCount(players.size());
+        addingTML.setAutoReverse(false);
+        addingTML.play();
+    }
+
+    @FXML
     void adminAddUser() {
 
     }
 
     @FXML
-    void adminDeleteUser() {
-
+    void adminDeleteUser() throws IOException {
+        Stage stage = (Stage) mainPane.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+        stage.setScene(new Scene(root, 700, 500));
     }
 
     @FXML
@@ -301,23 +327,16 @@ public class Controller extends Admin implements Initializable {
         adminMenu.setVisible(false);
     }
 
+    void close() throws SQLException {
+        makeOffline(nickname);
+        sql("Update", nickname, score);
+        closeConnection();
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         color_picker.setValue(Color.LIGHTBLUE);
-        adminMenuB.setDisable(true);
-        profN.setText(nickname.substring(0, 1).toUpperCase());
         actPrg.setStyle("-fx-accent: rgb(0, 0, 80)");
-        nickLabel.setText(nickname);
-        score = Integer.parseInt(sql("getScore", nickname));
-        setLevel();
-        addAdmin("Sakubek");
-        if(adminCheck(nickname)){
-            adminMenuB.setDisable(false);
-        }
-        if(!nickname.equals("Sakubek")){
-            adminTakeAdminB.setDisable(true);
-            adminGiveAdminB.setDisable(true);
-        }
 
         Timeline tml = new Timeline(new KeyFrame(Duration.millis(1000), e -> {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
@@ -327,6 +346,5 @@ public class Controller extends Admin implements Initializable {
         tml.setCycleCount(Timeline.INDEFINITE);
         tml.setAutoReverse(false);
         tml.play();
-        System.out.println(inputArea.getText());
     }
 }
