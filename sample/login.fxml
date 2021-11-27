@@ -13,7 +13,6 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane fx:id="mainPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Login">
    <children>
       <Rectangle height="500.0" stroke="BLACK" strokeType="INSIDE" width="700.0">
@@ -56,7 +55,7 @@
          </children>
       </AnchorPane>
       <TextField fx:id="loginTF" layoutX="276.0" layoutY="199.0" onMouseClicked="#clearAll" />
-      <CheckBox fx:id="register" layoutX="314.0" layoutY="363.0" mnemonicParsing="false" text="Register" />
+      <CheckBox fx:id="register" layoutX="314.0" layoutY="363.0" mnemonicParsing="false" onMouseClicked="#registering" text="Register" />
       <Button layoutX="322.0" layoutY="300.0" mnemonicParsing="false" onAction="#signIn" text="Log in" />
       <PasswordField fx:id="passField" layoutX="276.0" layoutY="256.0" onMouseClicked="#clearAll" />
       <Label alignment="CENTER" layoutX="200.0" layoutY="55.0" text="MS Table">
@@ -89,5 +88,6 @@
             <Font size="10.0" />
          </font>
       </Label>
+      <TextField fx:id="registerPassField" layoutX="276.0" layoutY="256.0" onMouseClicked="#clearAll" visible="false" />
    </children>
 </AnchorPane>

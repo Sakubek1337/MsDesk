@@ -10,10 +10,6 @@ public class Admin extends Extra{
         admins.add(adminName);
     }
 
-    public Boolean adminCheck(String name){
-        return admins.contains(name);
-    }
-
     void adminAddUserC(String name) {
 
     }

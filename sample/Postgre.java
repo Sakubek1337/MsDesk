@@ -4,12 +4,15 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class Postgre{
-    protected  String jdbcURL = "jdbc:postgresql://host";
-    protected String username = "nickname";
-    protected String password = "password";
+    protected String jdbcURL = "URL";
+    protected String username = "USERNAME";
+    protected String password = "DATABASE";
 
     Connection connection;
 
+    public void getCredentials(){
+
+    }
 
     public void sql(String q, String nick, int score) {
 
@@ -17,10 +20,7 @@ public class Postgre{
             try {
                 if (connection == null)
                     connection = DriverManager.getConnection(jdbcURL, username, password);
-                //System.out.println("Connected to Postgresql server successfully");
-                //String inserting= "INSERT INTO users(nick,score) VALUES ('elmir','7000')";
                 Statement statement = connection.createStatement();
-                //statement.executeUpdate(inserting);
 
                 String query = "SELECT * FROM users WHERE nick = '" + nick + "'";
                 ResultSet resultSet = statement.executeQuery(query);
@@ -37,6 +37,7 @@ public class Postgre{
         }else if(q.equals("Update")){
             try {
                 if (connection == null)
+
                     connection = DriverManager.getConnection(jdbcURL, username, password);
                 Statement statement = connection.createStatement();
                 String query = "UPDATE users SET score = " + score + " WHERE nick = '" + nick + "'";
@@ -109,7 +110,8 @@ public class Postgre{
                 connection = DriverManager.getConnection(jdbcURL, username, password);
             Statement statement = connection.createStatement();
 
-            String query = "SELECT nick FROM users WHERE is_online = 1 AND nick != '" + nickname +  "'";
+            String query = "SELECT nick FROM users WHERE is_online = 1 AND nick != '"
+                    + nickname +  "' ORDER BY title DESC";
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 String nick = resultSet.getString("nick");
@@ -123,11 +125,61 @@ public class Postgre{
         return players;
     }
 
+    public ArrayList<String> getOnlinePlayersTitles(String nickname){
+        ArrayList<String> ranks = new ArrayList<>();
+        try {
+            if (connection == null)
+                connection = DriverManager.getConnection(jdbcURL, username, password);
+            Statement statement = connection.createStatement();
+
+            String query = "SELECT title FROM users WHERE is_online = 1 AND nick != '"
+                    + nickname +  "' ORDER BY title DESC";
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                String nick = resultSet.getString("title");
+                ranks.add(nick);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error in connecting to Postgresql server");
+            e.printStackTrace();
+        }
+        return ranks;
+    }
+
+    public ArrayList<String> getRank(String nickname){
+        ArrayList<String> rank = new ArrayList<>();
+        rank.add("default");
+        try {
+            if (connection == null)
+                getCredentials();
+                connection = DriverManager.getConnection(jdbcURL, username, password);
+            Statement statement = connection.createStatement();
+
+            String query = "SELECT rank, custom_rank, custom_color FROM users WHERE nick = '" + nickname +  "'";
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                rank.clear();
+                String rank1 = resultSet.getString("rank");
+                rank.add(rank1);
+                String customRank = resultSet.getString("custom_rank");
+                rank.add(customRank);
+                String customColor = resultSet.getString("custom_color");
+                rank.add(customColor);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error in connecting to Postgresql server");
+            e.printStackTrace();
+        }
+        return rank;
+    }
+
     public void addUser(String nickname, String pass) throws SQLException {
         if (connection == null)
             connection = DriverManager.getConnection(jdbcURL, username, password);
         System.out.println("Connected to Postgresql server successfully");
-        String inserting= "INSERT INTO users VALUES ('" + nickname + "', '0', '" + pass + "', 0)";
+        String inserting= "INSERT INTO users VALUES ('" + nickname + "', '0', '" + pass + "', '', 0, 'Adventurer')";
         Statement statement = connection.createStatement();
         statement.executeUpdate(inserting);
     }
@@ -135,6 +187,7 @@ public class Postgre{
     public Boolean checkInternet(){
         try {
             if (connection == null)
+                getCredentials();
                 connection = DriverManager.getConnection(jdbcURL, username, password);
             Statement statement = connection.createStatement();
 
@@ -144,6 +197,25 @@ public class Postgre{
             e.printStackTrace();
         }
         return false;
+    }
+
+    public String getTitle(String nickname){
+        String title = "Unknown";
+        try {
+            if (connection == null)
+                connection = DriverManager.getConnection(jdbcURL, username, password);
+            Statement statement = connection.createStatement();
+            String query = "SELECT title FROM users WHERE nick = '" + nickname +  "'";
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                title = resultSet.getString("title");
+            }
+            return title;
+        } catch (SQLException e) {
+            System.out.println("Error in connecting to Postgresql server");
+            e.printStackTrace();
+        }
+        return title;
     }
 
     public Boolean checkUser(String nickname){
@@ -162,6 +234,16 @@ public class Postgre{
             e.printStackTrace();
         }
         return false;
+    }
+
+    public Boolean usernameTaken(String nickname) throws SQLException {
+        if(connection == null)
+            connection = DriverManager.getConnection(jdbcURL, username, password);
+        System.out.println("Connected to Postgresql server successfully");
+        String query = "SELECT nick FROM users WHERE nick = '" + nickname + "'";
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query);
+        return resultSet.next();
     }
 
     public Boolean checkPass(String nickname, String pass){

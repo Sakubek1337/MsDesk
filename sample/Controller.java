@@ -13,8 +13,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -38,29 +42,38 @@ public class Controller extends Admin implements Initializable {
     ArrayList<Label> descriptions = new ArrayList<>();
 
     int temp;
+    int timer = 10;
 
     @FXML
     AnchorPane mainPane;
     @FXML
+    Rectangle playersRect, tasksRect, friendsRect, profRect, settingsRect, shopRect, homeRect, homeRectFront;
+    @FXML
+    Rectangle playersRectFront, tasksRectFront, friendsRectFront, profRectFront, settingsRectFront, shopRectFront;
+    @FXML
     Label timeLabel, lvlLabel, nickLabel, lengthLabel, profN;
+    @FXML
+    Label titleLabel, titleLabel1, titleLabel2;
     @FXML
     AnchorPane adminMenu ,sqlMenu, playersMenu, tasksMenu;
     @FXML
-    Button adminMenuB, adminGiveAdminB, adminTakeAdminB;;
+    Button adminMenuB, adminGiveAdminB, adminTakeAdminB;
     @FXML
-    Button playersMenuB;
+    Button playersMenuB, tasksMenuB, friendsMenuB, profMenuB, settingsMenuB, shopMenuB, homeMenuB;
     @FXML
     ProgressBar actPrg;
     @FXML
     ScrollPane scrollPane;
     @FXML
-    AnchorPane tasks_content;
+    ScrollPane onlinePlayersSPane;
+    @FXML
+    AnchorPane tasks_content, onlinePlayersAPane;
     @FXML
     ColorPicker color_picker;
     @FXML
     TextField adminGiftTF, descriptionTF, adminAddTF;
     @FXML
-    TextArea inputArea, onlineTA;
+    TextArea inputArea;
     @FXML
     Rectangle levelPrg, errorLengthRect;
     @FXML
@@ -184,6 +197,37 @@ public class Controller extends Admin implements Initializable {
         setDiff((CheckMenuItem) event.getSource(), menu);
     }
 
+    void setTitle(){
+        ArrayList<String> title = getRank(nickname);
+        if (title.get(0).trim().equals("CUSTOM")){
+            int r = 166;
+            int g = 26;
+            int b = 188;
+            if(!title.get(2).trim().equals("default")){
+                r = Integer.parseInt(title.get(2).substring(0,3));
+                g = Integer.parseInt(title.get(2).substring(5,8));
+                b = Integer.parseInt(title.get(2).substring(10));
+            }
+            Color titleColor = Color.rgb(r, g, b);
+            titleLabel.setFont(new Font(14));
+            titleLabel1.setTextFill(titleColor);
+            titleLabel2.setTextFill(titleColor);
+            titleLabel1.setFont(Font.font("System", FontWeight.NORMAL, FontPosture.ITALIC, 14));
+            titleLabel2.setFont(Font.font("System", FontWeight.NORMAL, FontPosture.ITALIC, 14));
+            String [] strings = title.get(1).trim().split(" ");
+            if (strings.length > 1){
+                titleLabel1.setText(strings[0]);
+                titleLabel2.setText(strings[1]);
+            }else{
+                titleLabel1.setText(title.get(1));
+            }
+        }else{
+            titleLabel.setFont(new Font(12));
+            titleLabel1.setFont(Font.font("System", FontWeight.NORMAL, FontPosture.REGULAR, 12));
+            titleLabel1.setText(title.get(0));
+        }
+    }
+
     void setLevel(){
         lvlLabel.setText("Level - " +  String.format("%d", defLevel(score)));
         levelPrg.setWidth(50 * per(score));
@@ -195,17 +239,23 @@ public class Controller extends Admin implements Initializable {
         profN.setText(nickname.substring(0, 1).toUpperCase());
         nickLabel.setText(nickname);
         score = Integer.parseInt(sql("getScore", nickname));
-
+        clearFront();
+        ableAllButtons();
+        disableAllMenuPanes();
+        showPlayersMenu();
+        setTitle();
         setLevel();
         makeOnline(nickname);
         addAdmin("Sakubek");
-        if(adminCheck(nickname)){
+        String adminTitle = getTitle(nickname);
+        if(adminTitle.equals("Admin") || adminTitle.equals("Owner")){
             adminMenuB.setDisable(false);
         }
         if(!nickname.equals("Sakubek")){
             adminTakeAdminB.setDisable(true);
             adminGiveAdminB.setDisable(true);
         }
+
     }
 
     @FXML
@@ -214,16 +264,6 @@ public class Controller extends Admin implements Initializable {
         adminMenu.setVisible(!adminMenu.isVisible());
         sqlMenu.setDisable(true);
         sqlMenu.setVisible(false);
-    }
-
-    @FXML
-    void showPlayersMenu(){
-        refreshPlayers();
-        playersMenu.setVisible(true);
-        playersMenu.setDisable(false);
-        tasksMenu.setDisable(true);
-        tasksMenu.setVisible(false);
-        playersMenuB.setDisable(true);
     }
 
     @FXML
@@ -252,26 +292,71 @@ public class Controller extends Admin implements Initializable {
 
     @FXML
     void refreshPlayers(){
-        onlineTA.setText("* " + nickname + "\n");
-        temp = 0;
-        StringBuilder text = new StringBuilder(onlineTA.getText());
+        onlinePlayersAPane.getChildren().clear();
+        temp = 1;
         ArrayList<String> players = getOnlinePlayers(nickname);
-        Timeline addingTML = new Timeline(new KeyFrame(Duration.millis(10), e -> {
+        ArrayList<String> titles = getOnlinePlayersTitles(nickname);
+        ArrayList<Label> labels = new ArrayList<>();
+        Label firstNick = new Label();
+        firstNick.setText(nickname);
+        firstNick.setLayoutY(6);
+        firstNick.setLayoutX(20);
+        firstNick.setUnderline(true);
+        firstNick.setFont(new Font(14));
+        String title = getTitle(nickname);
+        if (title.equals("Admin") || title.equals("Owner")){
+            Label firstTitle = new Label();
+            firstTitle.setText(title);
+            firstTitle.setLayoutY(6);
+            firstTitle.setLayoutX(200);
+            firstTitle.setFont(new Font(14));
+            firstTitle.setTextFill(Color.rgb(199, 0, 0));
+            firstTitle.setAlignment(Pos.CENTER_RIGHT);
+            onlinePlayersAPane.getChildren().add(firstTitle);
+        }
+        Circle firstCircle = new Circle();
+        firstCircle.setFill(Color.LIMEGREEN);
+        firstCircle.setStrokeWidth(1.0);
+        firstCircle.setRadius(3);
+        firstCircle.setLayoutX(13);
+        firstCircle.setLayoutY(17);
+        labels.add(firstNick);
+        onlinePlayersAPane.getChildren().add(firstNick);
+        onlinePlayersAPane.getChildren().add(firstCircle);
+
+        Timeline onlinePlayersTML = new Timeline(new KeyFrame(Duration.millis(10), e ->{
             if (players.size() > 0){
-                try {
-                    text.append("* ").append(players.get(temp)).append("\n");
-                    temp++;
-                    if (temp >= players.size()) {
-                        onlineTA.setText(text.toString());
-                    }
-                } catch (Exception ex) {
-                    System.out.println("Whatever");
+                Label nextNick = new Label(players.get(temp - 1));
+                nextNick.setFont(new Font(14));
+                nextNick.setLayoutX(20);
+                nextNick.setLayoutY(temp * 17 + 6);
+
+                Circle circle = new Circle();
+                circle.setFill(Color.LIMEGREEN);
+                circle.setStrokeWidth(1.0);
+                circle.setRadius(3);
+                circle.setLayoutX(13);
+                circle.setLayoutY((temp + 1) * 17);
+                onlinePlayersAPane.getChildren().add(circle);
+
+                if(titles.get(temp - 1).equals("Admin") || titles.get(temp - 1).equals("Owner")){
+                    Label nextTitle = new Label();
+                    nextTitle.setText(titles.get(temp - 1));
+                    nextTitle.setLayoutY(nextNick.getLayoutY());
+                    nextTitle.setLayoutX(200);
+                    nextTitle.setTextFill(Color.rgb(199, 0, 0));
+                    nextTitle.setAlignment(Pos.CENTER_RIGHT);
+                    nextTitle.setFont(new Font(14));
+                    onlinePlayersAPane.getChildren().add(nextTitle);
                 }
+                labels.add(nextNick);
+                onlinePlayersAPane.getChildren().add(nextNick);
+                temp++;
             }
         }));
-        addingTML.setCycleCount(players.size());
-        addingTML.setAutoReverse(false);
-        addingTML.play();
+        onlinePlayersTML.setCycleCount(players.size());
+        onlinePlayersTML.setAutoReverse(false);
+        onlinePlayersTML.play();
     }
 
     @FXML
@@ -327,6 +412,102 @@ public class Controller extends Admin implements Initializable {
         adminMenu.setVisible(false);
     }
 
+    @FXML
+    void showSettingsMenu() {
+        disableAllMenuPanes();
+        clearFront();
+        ableAllButtons();
+        settingsMenuB.setDisable(true);
+        settingsRectFront.setVisible(true);
+    }
+
+    @FXML
+    void showShopMenu() {
+        disableAllMenuPanes();
+        clearFront();
+        ableAllButtons();
+        shopMenuB.setDisable(true);
+        shopRectFront.setVisible(true);
+    }
+
+    @FXML
+    void showTasksMenu() {
+        disableAllMenuPanes();
+        clearFront();
+        ableAllButtons();
+        tasksMenuB.setDisable(true);
+        tasksMenu.setVisible(true);
+        tasksMenu.setDisable(false);
+        tasksRectFront.setVisible(true);
+    }
+
+    @FXML
+    void showFriendsMenu() {
+        disableAllMenuPanes();
+        clearFront();
+        ableAllButtons();
+        friendsMenuB.setDisable(true);
+        friendsRectFront.setVisible(true);
+    }
+
+    @FXML
+    void showHomeMenu() {
+        disableAllMenuPanes();
+        clearFront();
+        ableAllButtons();
+        homeRectFront.setVisible(true);
+        homeMenuB.setDisable(true);
+    }
+
+    @FXML
+    void showPlayersMenu() {
+        disableAllMenuPanes();
+        clearFront();
+        ableAllButtons();
+
+        refreshPlayers();
+        playersRectFront.setVisible(true);
+        playersMenu.setVisible(true);
+        playersMenu.setDisable(false);
+        playersMenuB.setDisable(true);
+    }
+
+    @FXML
+    void showProfMenu() {
+        disableAllMenuPanes();
+        clearFront();
+        ableAllButtons();
+        profRectFront.setVisible(true);
+    }
+
+    void clearFront(){
+        playersRectFront.setVisible(false);
+        friendsRectFront.setVisible(false);
+        profRectFront.setVisible(false);
+        tasksRectFront.setVisible(false);
+        settingsRectFront.setVisible(false);
+        shopRectFront.setVisible(false);
+        homeRectFront.setVisible(false);
+    }
+
+    void disableAllMenuPanes(){
+        tasksMenu.setDisable(true);
+        tasksMenu.setVisible(false);
+        playersMenu.setVisible(false);
+        playersMenu.setDisable(true);
+
+    }
+
+    void ableAllButtons(){
+        playersMenuB.setDisable(false);
+        friendsMenuB.setDisable(false);
+        profMenuB.setDisable(false);
+        tasksMenuB.setDisable(false);
+        settingsMenuB.setDisable(false);
+        shopMenuB.setDisable(false);
+        homeMenuB.setDisable(false);
+    }
+
     void close() throws SQLException {
         makeOffline(nickname);
         sql("Update", nickname, score);
@@ -338,10 +519,15 @@ public class Controller extends Admin implements Initializable {
         color_picker.setValue(Color.LIGHTBLUE);
         actPrg.setStyle("-fx-accent: rgb(0, 0, 80)");
 
-        Timeline tml = new Timeline(new KeyFrame(Duration.millis(1000), e -> {
+        Timeline tml = new Timeline(new KeyFrame(Duration.seconds(6), e -> {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
             LocalDateTime now = LocalDateTime.now();
             timeLabel.setText(dtf.format(now));
+            timer--;
+            if (timer == 0){
+                timer = 10;
+                refreshPlayers();
+            }
         }));
         tml.setCycleCount(Timeline.INDEFINITE);
         tml.setAutoReverse(false);

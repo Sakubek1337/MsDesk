@@ -23,13 +23,13 @@ import java.util.ResourceBundle;
 
 public class Login extends Postgre implements Initializable {
     @FXML
-    private TextField loginTF;
+    private TextField loginTF, registerPassField;
 
     @FXML
     private PasswordField passField;
 
     ArrayList<Circle> circles = new ArrayList<>();
-    int timer = 10;
+    int timer = 20;
     boolean properUsername = false, properPassword = false, loaded = false;
 
     Pane connectionError;
@@ -64,11 +64,12 @@ public class Login extends Postgre implements Initializable {
         }else if(register.isSelected()){
             properUsername = false;
             properPassword = false;
-            properPassword();
+
             properUsername();
+            properPassword();
             if(properUsername){
                 if(properPassword){
-                    addUser(loginTF.getText(), passField.getText());
+                    addUser(loginTF.getText(), registerPassField.getText());
                     loading();
                 }else{
                     passField.setText("");
@@ -84,7 +85,7 @@ public class Login extends Postgre implements Initializable {
         errorPane.setVisible(false);
     }
 
-    void properUsername(){
+    void properUsername() throws SQLException {
         int nameLength = loginTF.getText().length();
         if (nameLength < 4){
             wrongName.setText("Username is too short");
@@ -95,12 +96,17 @@ public class Login extends Postgre implements Initializable {
             wrongName.setVisible(true);
             errorPane.setVisible(true);
         }else{
-            properUsername = true;
+            if(!usernameTaken(loginTF.getText())){
+                properUsername = true;
+            }else{
+                wrongName.setText("Username is taken.");
+                wrongName.setVisible(true);
+            }
         }
     }
 
     void properPassword(){
-        int nameLength = passField.getText().length();
+        int nameLength = registerPassField.getText().length();
         if (nameLength < 4){
             passField.setText("");
             wrongPass.setText("Password is too short");
@@ -118,13 +124,14 @@ public class Login extends Postgre implements Initializable {
 
     void loading(){
         loadingPane.setVisible(true);
-        Timeline tml = new Timeline(new KeyFrame(Duration.millis(200), e -> {
+        Timeline tml = new Timeline(new KeyFrame(Duration.millis(100), e -> {
             checkColor();
             circles.add(circles.get(0));
             circles.remove(0);
             timer--;
             if(timer <= 0 && !loaded){
                 try{
+                    loaded = true;
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("sample.fxml"));
                     Parent root = loader.load();
                     Controller controller = loader.getController();
@@ -139,7 +146,7 @@ public class Login extends Postgre implements Initializable {
                     });
                     stage.setScene(new Scene(root, 700, 500));
                     stage.show();
-                    loaded = true;
+
                 }catch (IOException exception){
                     System.out.println(exception.getMessage());
                 }
@@ -163,6 +170,19 @@ public class Login extends Postgre implements Initializable {
             mainPane.setDisable(false);
             connectionError.setVisible(false);
             connectionError.setDisable(true);
+        }
+    }
+
+    @FXML
+    void registering(){
+        if(register.isSelected()){
+            registerPassField.setVisible(true);
+            registerPassField.setDisable(false);
+            passField.setDisable(true);
+        }else{
+            registerPassField.setVisible(false);
+            registerPassField.setDisable(true);
+            passField.setDisable(false);
         }
     }
 
@@ -193,5 +213,6 @@ public class Login extends Postgre implements Initializable {
                 }
             return change;
         }));
+
     }
 }
