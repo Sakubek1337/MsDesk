@@ -4,14 +4,50 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class Postgre{
-    protected String jdbcURL = "URL";
-    protected String username = "USERNAME";
-    protected String password = "DATABASE";
+    protected String jdbcURL = "";
+    protected String username = "";
+    protected String password = "";
 
     Connection connection;
 
     public void getCredentials(){
 
+    }
+
+    public ArrayList<String> getChats(String nickname){
+        ArrayList<String> chats = new ArrayList<>();
+        try {
+            if (connection == null)
+                connection = DriverManager.getConnection(jdbcURL, username, password);
+            Statement statement = connection.createStatement();
+
+            String query = "SELECT nick1, nick2 FROM chats WHERE nick1 = '" + nickname + "' OR nick2 = '"
+                    + nickname + "'";
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                String nick1 = resultSet.getString("nick1");
+                String nick2 = resultSet.getString("nick2");
+                if(nick1.equals(nickname)){
+                    chats.add(nick2);
+                }else{
+                    chats.add(nick1);
+                }
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error in connecting to Postgresql server");
+            e.printStackTrace();
+        }
+        return chats;
+    }
+
+    public void addChat(String nickname1, String nickname2) throws SQLException {
+        if (connection == null)
+            connection = DriverManager.getConnection(jdbcURL, username, password);
+        System.out.println("Connected to Postgresql server successfully");
+        String inserting= "INSERT INTO chats(nick1, nick2) VALUES ('" + nickname1 + "', '" + nickname2 + "')";
+        Statement statement = connection.createStatement();
+        statement.executeUpdate(inserting);
     }
 
     public void sql(String q, String nick, int score) {
@@ -103,6 +139,84 @@ public class Postgre{
         }
     }
 
+    public Integer getChatID(String nickname1, String nickname2){
+        int id = 0;
+        try {
+            if (connection == null)
+                connection = DriverManager.getConnection(jdbcURL, username, password);
+            Statement statement = connection.createStatement();
+
+            String query = "SELECT chat_id FROM chats WHERE (nick1 = '" + nickname1 + "' OR nick2 = '"
+                    + nickname1 + "')" + " AND (nick1 = '" + nickname2 + "' OR nick2 = '" + nickname2 + "')";
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                id = resultSet.getInt("chat_id");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error in connecting to Postgresql server");
+            e.printStackTrace();
+        }
+        return id;
+    }
+
+    public ArrayList<ArrayList<String>> getMessages(String nickname1, String nickname2){
+        ArrayList<ArrayList<String>> messages = new ArrayList<>();
+        int chatID = getChatID(nickname1, nickname2);
+        try {
+            if (connection == null)
+                connection = DriverManager.getConnection(jdbcURL, username, password);
+            Statement statement = connection.createStatement();
+
+            String query = "SELECT msg_text, sender_nick FROM messages WHERE chat_id = " + chatID +
+                    " ORDER BY message_id";
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                String sender  = resultSet.getString("sender_nick");
+                String msg = resultSet.getString("msg_text");
+                ArrayList<String> add = new ArrayList<>();
+                add.add(sender);
+                add.add(msg);
+                messages.add(add);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error in connecting to Postgresql server");
+            e.printStackTrace();
+        }
+        return messages;
+    }
+
+    public void addMessage(String sender, int chat_id, String msg) throws SQLException {
+        if (connection == null)
+            connection = DriverManager.getConnection(jdbcURL, username, password);
+        System.out.println("Connected to Postgresql server successfully");
+        String inserting= "INSERT INTO messages(msg_text, chat_id, sender_nick) VALUES ('" +
+                msg + "', " + chat_id + ", '" + sender + "')";
+        Statement statement = connection.createStatement();
+        statement.executeUpdate(inserting);
+    }
+
+    public String getStatus(String nickname){
+        try {
+            if (connection == null)
+                connection = DriverManager.getConnection(jdbcURL, username, password);
+            Statement statement = connection.createStatement();
+
+            String query = "SELECT is_online FROM users WHERE nick = '" + nickname +"'";
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                int is = resultSet.getInt("is_online");
+                if (is == 1){
+                    return "Online";
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error in connecting to Postgresql server");
+            e.printStackTrace();
+        }
+        return "Offline";
+    }
+
     public ArrayList<String> getOnlinePlayers(String nickname){
         ArrayList<String> players = new ArrayList<>();
         try {
@@ -179,7 +293,7 @@ public class Postgre{
         if (connection == null)
             connection = DriverManager.getConnection(jdbcURL, username, password);
         System.out.println("Connected to Postgresql server successfully");
-        String inserting= "INSERT INTO users VALUES ('" + nickname + "', '0', '" + pass + "', '', 0, 'Adventurer')";
+        String inserting = "INSERT INTO users VALUES ('" + nickname + "', '0', '" + pass + "', '', 0, 'Adventurer')";
         Statement statement = connection.createStatement();
         statement.executeUpdate(inserting);
     }

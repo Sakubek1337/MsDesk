@@ -29,7 +29,7 @@ public class Login extends Postgre implements Initializable {
     private PasswordField passField;
 
     ArrayList<Circle> circles = new ArrayList<>();
-    int timer = 20;
+    int timer = 21;
     boolean properUsername = false, properPassword = false, loaded = false;
 
     Pane connectionError;
@@ -47,11 +47,17 @@ public class Login extends Postgre implements Initializable {
         if(!register.isSelected()){
              if (checkUser(loginTF.getText())){
                 if(checkPass(loginTF.getText(), passField.getText())){
-                    mainPane.setDisable(true);
-                    loading();
-
+                    if(getStatus(loginTF.getText()).equals("Offline")){
+                        mainPane.setDisable(true);
+                        loading();
+                        wrongName.setVisible(false);
+                    }else{
+                        wrongName.setText("User is already online.");
+                        wrongName.setVisible(true);
+                    }
                     wrongPass.setVisible(false);
-                    wrongName.setVisible(false);
+
+
                 }else{
                     wrongPass.setText("Incorrect password.");
                     wrongPass.setVisible(true);
@@ -91,7 +97,7 @@ public class Login extends Postgre implements Initializable {
             wrongName.setText("Username is too short");
             wrongName.setVisible(true);
             errorPane.setVisible(true);
-        }else if(nameLength > 20){
+        }else if(nameLength > 15){
             wrongName.setText("Username is too long");
             wrongName.setVisible(true);
             errorPane.setVisible(true);

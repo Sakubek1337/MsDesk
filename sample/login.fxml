@@ -38,7 +38,7 @@
       <AnchorPane fx:id="errorPane" prefHeight="500.0" prefWidth="700.0" visible="false">
          <children>
             <Rectangle arcHeight="35.0" arcWidth="35.0" fill="#d9e0e8" height="71.0" layoutX="453.0" layoutY="195.0" stroke="#16757c" strokeType="INSIDE" strokeWidth="2.0" width="110.0" />
-            <Label alignment="CENTER" layoutX="453.0" layoutY="195.0" prefHeight="71.0" prefWidth="110.0" text="Username length&#10;(4-20)&#10;Password length&#10;(4-25)" textAlignment="CENTER" textFill="#172f32">
+            <Label alignment="CENTER" layoutX="453.0" layoutY="195.0" prefHeight="71.0" prefWidth="110.0" text="Username length&#10;(4-15)&#10;Password length&#10;(4-25)" textAlignment="CENTER" textFill="#172f32">
                <font>
                   <Font size="10.0" />
                </font>

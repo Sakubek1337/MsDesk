@@ -4,25 +4,19 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -34,15 +28,19 @@ public class Controller extends Admin implements Initializable {
 
     String nickname = "";
     String passw = "";
+    String currentChatUser = "";
     int score;
+    int temp;
+    int msgN;
+    int currentChatID;
+    int timer = 10;
+    Rectangle chatBG;
 
     ArrayList<Rectangle> rects = new ArrayList<>();
     ArrayList<Button> buttons = new ArrayList<>();
     ArrayList<Label> labels = new ArrayList<>();
     ArrayList<Label> descriptions = new ArrayList<>();
-
-    int temp;
-    int timer = 10;
+    ArrayList<Timeline> timelines = new ArrayList<>();
 
     @FXML
     AnchorPane mainPane;
@@ -51,13 +49,13 @@ public class Controller extends Admin implements Initializable {
     @FXML
     Rectangle playersRectFront, tasksRectFront, friendsRectFront, profRectFront, settingsRectFront, shopRectFront;
     @FXML
-    Label timeLabel, lvlLabel, nickLabel, lengthLabel, profN;
+    Label timeLabel, lvlLabel, nickLabel, lengthLabel, profN, selectChatLabel, msgErrorLabel;
     @FXML
-    Label titleLabel, titleLabel1, titleLabel2;
+    Label titleLabel, titleLabel1, titleLabel2, selectedUser, selectedUserStatus, userNotFoundLabel;
     @FXML
-    AnchorPane adminMenu ,sqlMenu, playersMenu, tasksMenu;
+    AnchorPane adminMenu ,sqlMenu, playersMenu, tasksMenu, chatMenu;
     @FXML
-    Button adminMenuB, adminGiveAdminB, adminTakeAdminB;
+    Button adminMenuB, adminGiveAdminB, adminTakeAdminB, sendMsgB;
     @FXML
     Button playersMenuB, tasksMenuB, friendsMenuB, profMenuB, settingsMenuB, shopMenuB, homeMenuB;
     @FXML
@@ -65,13 +63,13 @@ public class Controller extends Admin implements Initializable {
     @FXML
     ScrollPane scrollPane;
     @FXML
-    ScrollPane onlinePlayersSPane;
+    ScrollPane onlinePlayersSPane, chatScrollPane;
     @FXML
-    AnchorPane tasks_content, onlinePlayersAPane;
+    AnchorPane tasks_content, onlinePlayersAPane, chatsAP, chatContent;
     @FXML
     ColorPicker color_picker;
     @FXML
-    TextField adminGiftTF, descriptionTF, adminAddTF;
+    TextField adminGiftTF, descriptionTF, adminAddTF, msgTF, addChatTF;
     @FXML
     TextArea inputArea;
     @FXML
@@ -89,8 +87,6 @@ public class Controller extends Admin implements Initializable {
         }else{
             Rectangle last = rects.get(rects.size() - 1);
             rect.setLayoutY(last.getLayoutY() + 10 + last.getHeight());
-            System.out.println(last.getLayoutY());
-            System.out.println(rects.size());
         }
         rect.setLayoutX(10);
         rect.setArcHeight(10);
@@ -256,7 +252,7 @@ public class Controller extends Admin implements Initializable {
             adminGiveAdminB.setDisable(true);
         }
 
-    }
+    }//First function
 
     @FXML
     void showAdminMenu(){
@@ -320,6 +316,7 @@ public class Controller extends Admin implements Initializable {
         firstCircle.setRadius(3);
         firstCircle.setLayoutX(13);
         firstCircle.setLayoutY(17);
+        firstCircle.setStroke(Color.BLACK);
         labels.add(firstNick);
         onlinePlayersAPane.getChildren().add(firstNick);
         onlinePlayersAPane.getChildren().add(firstCircle);
@@ -334,6 +331,7 @@ public class Controller extends Admin implements Initializable {
                 Circle circle = new Circle();
                 circle.setFill(Color.LIMEGREEN);
                 circle.setStrokeWidth(1.0);
+                circle.setStroke(Color.BLACK);
                 circle.setRadius(3);
                 circle.setLayoutX(13);
                 circle.setLayoutY((temp + 1) * 17);
@@ -364,11 +362,207 @@ public class Controller extends Admin implements Initializable {
 
     }
 
+    void refreshChat(String nickname2){
+        String newStatus = getStatus(nickname2);
+        if (!newStatus.equals(selectedUserStatus.getText())){
+            selectedUserStatus.setText(newStatus);
+        }
+
+        ArrayList<ArrayList<String>> messages = getMessages(nickname, nickname2);
+
+        if(messages.size() > msgN && msgN >= 9){
+            chatBG.setHeight(chatBG.getHeight() + (messages.size() - msgN) * 40);
+            chatScrollPane.setVvalue(1.0);
+        }
+        int dif = messages.size() - msgN;
+        if (dif > 0){
+            Timeline newMsg = new Timeline(new KeyFrame(Duration.millis(100), e -> {
+                Rectangle rect = new Rectangle();
+                Label label = new Label();
+                String msg = messages.get(msgN).get(1);
+                rect.setFill(Color.WHITE);
+                rect.setStrokeWidth(1);
+                rect.setStroke(Color.BLACK);
+                rect.setArcWidth(10);
+                rect.setArcHeight(10);
+                label.setText(msg);
+                rect.setLayoutX(4);
+                rect.setLayoutY(15 + 40 * msgN);
+                rect.setWidth(24 + 6 * msg.length());
+                rect.setHeight(30);
+                label.setLayoutX(14);
+                label.setPrefWidth(327);
+                label.setAlignment(Pos.CENTER_LEFT);
+                label.setLayoutY(rect.getLayoutY() + 7);
+                label.setFont(new Font(12));
+                chatContent.getChildren().add(rect);
+                chatContent.getChildren().add(label);
+                chatScrollPane.setVvalue(1.0);
+                msgN++;
+            }));
+            newMsg.setAutoReverse(false);
+            newMsg.setCycleCount(dif);
+            newMsg.play();
+        }
+    }
+
+    void showChat(String nickname2){
+        currentChatUser = nickname2;
+        currentChatID = getChatID(nickname, nickname2);
+        chatContent.getChildren().clear();
+        ArrayList<ArrayList<String>> messages = getMessages(nickname, nickname2);
+        Color clr = Color.rgb(183, 255, 192);
+        chatBG = new Rectangle();
+        chatBG.setFill(clr);
+        chatBG.setLayoutY(0);
+        chatBG.setLayoutX(0);
+        chatBG.setHeight(370);
+        chatBG.setWidth(370);
+        chatBG.setStrokeWidth(0);
+        if(messages.size() > 9){
+            chatBG.setHeight(chatBG.getHeight() + (messages.size() - 9) * 40);
+        }
+        chatContent.getChildren().add(chatBG);
+        selectChatLabel.setVisible(false);
+        selectChatLabel.setDisable(true);
+        selectedUser.setText(nickname2);
+        selectedUserStatus.setText(getStatus(nickname2));
+        selectedUserStatus.setUnderline(true);
+        msgN = messages.size();
+        if(messages.size() > 0){
+            temp = 0;
+            Timeline msgTML = new Timeline(new KeyFrame(Duration.millis(100), e -> {
+                String sender = messages.get(temp).get(0);
+                Rectangle rect = new Rectangle();
+                Label label = new Label();
+                rect.setFill(Color.WHITE);
+                rect.setStrokeWidth(1);
+                rect.setStroke(Color.BLACK);
+                rect.setArcWidth(10);
+                rect.setArcHeight(10);
+                label.setText(messages.get(temp).get(1));
+                int length = messages.get(temp).get(1).length();
+                if(sender.equals(nickname)){
+                    rect.setLayoutX(326 - 6 * length);
+                    rect.setLayoutY(15 + 40 * temp);
+                    rect.setWidth(24 + 6 * length);
+                    rect.setHeight(30);
+                    label.setLayoutX(14);
+                    label.setPrefWidth(327);
+                    label.setAlignment(Pos.CENTER_RIGHT);
+                }else{
+                    rect.setLayoutX(4);
+                    rect.setLayoutY(15 + 40 * temp);
+                    rect.setWidth(24 + 6 * length);
+                    rect.setHeight(30);
+                    label.setLayoutX(14);
+                    label.setPrefWidth(327);
+                    label.setAlignment(Pos.CENTER_LEFT);
+                }
+                label.setLayoutY(rect.getLayoutY() + 7);
+                label.setFont(new Font(12));
+                chatContent.getChildren().add(rect);
+                chatContent.getChildren().add(label);
+                chatScrollPane.setVvalue(1.0);
+                temp++;
+            }));
+            msgTML.setCycleCount(messages.size());
+            msgTML.setAutoReverse(false);
+            msgTML.play();
+        }
+        if(timelines.size() > 0){
+            timelines.get(0).stop();
+            timelines.remove(0);
+        }
+        Timeline rfChat = new Timeline(new KeyFrame(Duration.seconds(6), event -> refreshChat(nickname2)));
+        rfChat.setCycleCount(Timeline.INDEFINITE);
+        rfChat.setAutoReverse(false);
+        rfChat.play();
+        timelines.add(rfChat);
+    }
+
+    void refreshChats(){
+        chatsAP.getChildren().clear();
+        ArrayList<String> chats = getChats(nickname);
+        if (chats.size() > 0){
+            temp = 0;
+            Timeline chatsTML = new Timeline(new KeyFrame(Duration.millis(10), e ->{
+                Button chatButton = new Button();
+                chatButton.setLayoutX(5);
+                chatButton.setLayoutY(temp * 30 + 10);
+                chatButton.setPrefWidth(127);
+                chatButton.setPrefHeight(25);
+                chatButton.setText(chats.get(temp));
+                chatButton.setOnAction(ev -> showChat(chatButton.getText()));
+                chatsAP.getChildren().add(chatButton);
+                temp++;
+            }));
+            chatsTML.setCycleCount(chats.size());
+            chatsTML.setAutoReverse(false);
+            chatsTML.play();
+        }
+    }
+
     @FXML
-    void adminDeleteUser() throws IOException {
-        Stage stage = (Stage) mainPane.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
-        stage.setScene(new Scene(root, 700, 500));
+    void sendMsg() throws SQLException {
+
+        Label label = new Label();
+        Rectangle rect = new Rectangle();
+        if(msgTF.getText().length() != 0)
+            rect.setFill(Color.WHITE);
+            rect.setStrokeWidth(1);
+            rect.setStroke(Color.BLACK);
+            rect.setArcWidth(10);
+            rect.setArcHeight(10);
+            label.setText(msgTF.getText().trim());
+            int length = msgTF.getText().trim().length();
+            if(length < 41 && length > 0){
+                rect.setLayoutX(326 - 6 * length);
+                rect.setLayoutY(15 + 40 * msgN - 1);
+                rect.setWidth(24 + 6 * length);
+                rect.setHeight(30);
+                label.setLayoutX(14);
+                label.setPrefWidth(327);
+                label.setAlignment(Pos.CENTER_RIGHT);
+
+                label.setLayoutY(rect.getLayoutY() + 7);
+                label.setFont(new Font(12));
+                chatContent.getChildren().add(rect);
+                chatContent.getChildren().add(label);
+                chatScrollPane.setVvalue(1.0);
+                addMessage(nickname, currentChatID, msgTF.getText().trim());
+                ArrayList<ArrayList<String>> messages = getMessages(nickname, currentChatUser);
+                if(messages.size() > msgN && msgN >= 9){
+                    chatBG.setHeight(chatBG.getHeight() + (messages.size() - msgN) * 40);
+                    chatScrollPane.setVvalue(1.0);
+                }
+                msgErrorLabel.setVisible(false);
+                msgTF.setText("");
+                msgN++;
+            }else{
+                if(length > 40){
+                    msgErrorLabel.setVisible(true);
+                    msgErrorLabel.setText("Max length is 40. Now - " + length + ".");
+                }
+            }
+    }
+
+    @FXML
+    void addChatA() throws SQLException {
+        if(addChatTF.getText().length() > 0){
+            if(checkUser(addChatTF.getText().trim())){
+                addChat(nickname, addChatTF.getText().trim());
+                refreshChats();
+                userNotFoundLabel.setVisible(false);
+            }else{
+                userNotFoundLabel.setVisible(true);
+            }
+        }
+    }
+
+    @FXML
+    void adminDeleteUser(){
+
     }
 
     @FXML
@@ -442,12 +636,15 @@ public class Controller extends Admin implements Initializable {
     }
 
     @FXML
-    void showFriendsMenu() {
+    void showFriendsMenu() { // CHAT MENU
         disableAllMenuPanes();
         clearFront();
         ableAllButtons();
         friendsMenuB.setDisable(true);
         friendsRectFront.setVisible(true);
+        chatMenu.setVisible(true);
+        chatMenu.setDisable(false);
+        refreshChats();
     }
 
     @FXML
@@ -495,7 +692,8 @@ public class Controller extends Admin implements Initializable {
         tasksMenu.setVisible(false);
         playersMenu.setVisible(false);
         playersMenu.setDisable(true);
-
+        chatMenu.setDisable(true);
+        chatMenu.setVisible(false);
     }
 
     void ableAllButtons(){
@@ -516,8 +714,20 @@ public class Controller extends Admin implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        userNotFoundLabel.setVisible(false);
         color_picker.setValue(Color.LIGHTBLUE);
         actPrg.setStyle("-fx-accent: rgb(0, 0, 80)");
+        msgTF.setTextFormatter(new TextFormatter<>(change -> {
+            if(change.getText().length() > 0)
+                if(change.getText().equals("'")){
+                    change.setText("");
+                }else if(change.getText().equals("\"")){
+                    change.setText("");
+                }else if(change.getText().equals("\\")){
+                    change.setText("");
+                }
+            return change;
+        }));
 
         Timeline tml = new Timeline(new KeyFrame(Duration.seconds(6), e -> {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
