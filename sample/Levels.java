@@ -4,7 +4,6 @@ public class Levels extends Postgre{
     public Integer defLevel(int score){
         int lvl = 1;
         lvl += score / 2000;
-        System.out.println(score);
         return lvl;
     }
 

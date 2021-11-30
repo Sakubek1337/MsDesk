@@ -4,9 +4,9 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class Postgre{
-    protected String jdbcURL = "";
-    protected String username = "";
-    protected String password = "";
+    protected String jdbcURL = "jdbc:posr529vc82";
+    protected String username = "ncx2d";
+    protected String password = "9580b3732f802";
 
     Connection connection;
 
@@ -86,9 +86,9 @@ public class Postgre{
         }
     }
 
-    public String sql(String q, String nick){
+    public Integer sql(String q, String nick){
 
-        String r = "0";
+        int r = 0;
 
         if (q.equals("getScore")) {
             try {
@@ -99,7 +99,7 @@ public class Postgre{
                 String query = "SELECT score FROM users WHERE nick = '" + nick + "'";
                 ResultSet resultSet = statement.executeQuery(query);
                 while (resultSet.next()) {
-                    r = resultSet.getString("score");
+                    r = resultSet.getInt("score");
                 }
             } catch (SQLException e) {
                 System.out.println("Error in connecting to Postgresql server");
@@ -159,6 +159,29 @@ public class Postgre{
         return id;
     }
 
+    public Boolean checkLastVersion(String v){
+        String version;
+        try {
+            if (connection == null)
+                connection = DriverManager.getConnection(jdbcURL, username, password);
+            Statement statement = connection.createStatement();
+
+            String query = "SELECT * FROM info";
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                version  = resultSet.getString("last_version");
+                if (version.equals(v)){
+                    return true;
+                }
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error in connecting to Postgresql server");
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public ArrayList<ArrayList<String>> getMessages(String nickname1, String nickname2){
         ArrayList<ArrayList<String>> messages = new ArrayList<>();
         int chatID = getChatID(nickname1, nickname2);
@@ -184,6 +207,37 @@ public class Postgre{
             e.printStackTrace();
         }
         return messages;
+    }
+
+    public ArrayList<ArrayList<String>> getLeaderboard(){
+        ArrayList<ArrayList<String>> out = new ArrayList<>();
+        try {
+            if (connection == null)
+                connection = DriverManager.getConnection(jdbcURL, username, password);
+            Statement statement = connection.createStatement();
+
+            String query = "SELECT nick, score, rank, custom_rank, custom_color FROM users ORDER BY score DESC";
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                String nick = resultSet.getString("nick");
+                String score = resultSet.getString("score");
+                String title = resultSet.getString("rank");
+                String customTitle = resultSet.getString("custom_rank");
+                String customColor = resultSet.getString("custom_color");
+                ArrayList<String> add = new ArrayList<>();
+                add.add(nick);
+                add.add(score);
+                add.add(title);
+                add.add(customTitle);
+                add.add(customColor);
+                out.add(add);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error in connecting to Postgresql server");
+            e.printStackTrace();
+        }
+        return out;
     }
 
     public void addMessage(String sender, int chat_id, String msg) throws SQLException {
@@ -293,7 +347,7 @@ public class Postgre{
         if (connection == null)
             connection = DriverManager.getConnection(jdbcURL, username, password);
         System.out.println("Connected to Postgresql server successfully");
-        String inserting = "INSERT INTO users VALUES ('" + nickname + "', '0', '" + pass + "', '', 0, 'Adventurer')";
+        String inserting = "INSERT INTO users(nick, password, title, is_online, rank) VALUES ('" + nickname + "','" + pass + "', '', 0, 'Adventurer')";
         Statement statement = connection.createStatement();
         statement.executeUpdate(inserting);
     }

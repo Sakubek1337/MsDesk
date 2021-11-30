@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -41,6 +42,11 @@ public class Login extends Postgre implements Initializable {
     Label wrongName, wrongPass;
     @FXML
     CheckBox register;
+    @FXML
+    Rectangle versionErrorRect;
+    @FXML
+    Label versionErrorLabel;
+    String version = "v0.3.5";
 
     @FXML
     void signIn() throws SQLException {
@@ -194,8 +200,13 @@ public class Login extends Postgre implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if (!checkInternet()){
+        if (!checkInternet() || !checkLastVersion(version)){
             mainPane.setDisable(true);
+        }else{
+            versionErrorLabel.setDisable(true);
+            versionErrorLabel.setVisible(false);
+            versionErrorRect.setDisable(true);
+            versionErrorRect.setVisible(false);
         }
         circles.add(circle1);
         circles.add(circle2);

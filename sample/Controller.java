@@ -30,7 +30,7 @@ public class Controller extends Admin implements Initializable {
     String passw = "";
     String currentChatUser = "";
     int score;
-    int temp;
+    int temp, temp3;
     int msgN;
     int currentChatID;
     int timer = 10;
@@ -53,19 +53,19 @@ public class Controller extends Admin implements Initializable {
     @FXML
     Label titleLabel, titleLabel1, titleLabel2, selectedUser, selectedUserStatus, userNotFoundLabel;
     @FXML
-    AnchorPane adminMenu ,sqlMenu, playersMenu, tasksMenu, chatMenu;
+    AnchorPane adminMenu ,sqlMenu, playersMenu, tasksMenu, chatMenu, gamesMenu;
     @FXML
-    Button adminMenuB, adminGiveAdminB, adminTakeAdminB, sendMsgB;
+    Button adminMenuB, adminGiveAdminB, adminTakeAdminB, sendMsgB, refreshLeaderboardB;
     @FXML
-    Button playersMenuB, tasksMenuB, friendsMenuB, profMenuB, settingsMenuB, shopMenuB, homeMenuB;
+    Button playersMenuB, tasksMenuB, friendsMenuB, profMenuB, gamesMenuB, shopMenuB, homeMenuB;
     @FXML
     ProgressBar actPrg;
     @FXML
     ScrollPane scrollPane;
     @FXML
-    ScrollPane onlinePlayersSPane, chatScrollPane;
+    ScrollPane onlinePlayersSPane, chatScrollPane, leaderboardScrollPane;
     @FXML
-    AnchorPane tasks_content, onlinePlayersAPane, chatsAP, chatContent;
+    AnchorPane tasks_content, onlinePlayersAPane, chatsAP, chatContent, leaderboardContent;
     @FXML
     ColorPicker color_picker;
     @FXML
@@ -234,7 +234,7 @@ public class Controller extends Admin implements Initializable {
         passw = pass;
         profN.setText(nickname.substring(0, 1).toUpperCase());
         nickLabel.setText(nickname);
-        score = Integer.parseInt(sql("getScore", nickname));
+        score = sql("getScore", nickname);
         clearFront();
         ableAllButtons();
         disableAllMenuPanes();
@@ -474,7 +474,7 @@ public class Controller extends Admin implements Initializable {
             timelines.get(0).stop();
             timelines.remove(0);
         }
-        Timeline rfChat = new Timeline(new KeyFrame(Duration.seconds(6), event -> refreshChat(nickname2)));
+        Timeline rfChat = new Timeline(new KeyFrame(Duration.seconds(10), event -> refreshChat(nickname2)));
         rfChat.setCycleCount(Timeline.INDEFINITE);
         rfChat.setAutoReverse(false);
         rfChat.play();
@@ -501,6 +501,76 @@ public class Controller extends Admin implements Initializable {
             chatsTML.setAutoReverse(false);
             chatsTML.play();
         }
+    }
+
+    @FXML
+    void refreshLeaderboard(){
+        sql("Update", nickname, score);
+        temp3 = 0;
+        refreshLeaderboardB.setDisable(true);
+        leaderboardContent.getChildren().clear();
+        ArrayList<ArrayList<String>> leaderboard = getLeaderboard();
+        System.out.println(leaderboard.size());
+        if(leaderboard.size() > 0) {
+            Timeline lbTml = new Timeline(new KeyFrame(Duration.millis(50), e-> {
+                Label nick = new Label();
+                nick.setLayoutX(6);
+                nick.setLayoutY(temp3 * 20 + 10);
+                nick.setFont(Font.font("Verdana", FontPosture.ITALIC, 12));
+                nick.setText((temp3 + 1) + "." + leaderboard.get(temp3).get(0));
+                nick.setPrefWidth(172);
+                nick.setAlignment(Pos.CENTER_LEFT);
+
+                Label score = new Label();
+                score.setLayoutX(180);
+                score.setLayoutY(nick.getLayoutY());
+                score.setFont(Font.font("Verdana", FontPosture.ITALIC, 12));
+                score.setText(String.format("%d", defLevel(Integer.parseInt(leaderboard.get(temp3).get(1)))) + " level");
+                score.setPrefWidth(111);
+                score.setAlignment(Pos.CENTER);
+
+                Label title = new Label();
+                String rank = leaderboard.get(temp3).get(2);
+                String custom_rank = leaderboard.get(temp3).get(3);
+                String custom_color = leaderboard.get(temp3).get(4);
+                title.setFont(Font.font("Verdana", FontPosture.ITALIC, 12));
+                title.setLayoutX(290);
+                title.setLayoutY(nick.getLayoutY());
+                title.setPrefWidth(200);
+                title.setAlignment(Pos.CENTER);
+                if(rank.equals("CUSTOM")){
+                    int r = 166;
+                    int g = 26;
+                    int b = 188;
+                    if(!custom_color.equals("default")){
+                        r = Integer.parseInt(custom_color.substring(0,3));
+                        g = Integer.parseInt(custom_color.substring(5,8));
+                        b = Integer.parseInt(custom_color.substring(10));
+                    }
+                    Color titleColor = Color.rgb(r, g, b);
+                    title.setFont(new Font(13));
+                    title.setFont(Font.font("Verdana", FontWeight.NORMAL, FontPosture.ITALIC, 12));
+                    title.setText(custom_rank);
+                    title.setTextFill(titleColor);
+                }else{
+                    title.setFont(new Font(13));
+                    title.setFont(Font.font("Verdana", FontWeight.NORMAL, FontPosture.ITALIC, 12));
+                    title.setText(rank);
+                }
+                leaderboardContent.getChildren().add(nick);
+                leaderboardContent.getChildren().add(score);
+                leaderboardContent.getChildren().add(title);
+                leaderboardContent.setVisible(true);
+                temp3++;
+                if(temp3 == leaderboard.size()){
+                    refreshLeaderboardB.setDisable(false);
+                }
+            }));
+            lbTml.setAutoReverse(false);
+            lbTml.setCycleCount(leaderboard.size());
+            lbTml.play();
+        }
+
     }
 
     @FXML
@@ -607,15 +677,6 @@ public class Controller extends Admin implements Initializable {
     }
 
     @FXML
-    void showSettingsMenu() {
-        disableAllMenuPanes();
-        clearFront();
-        ableAllButtons();
-        settingsMenuB.setDisable(true);
-        settingsRectFront.setVisible(true);
-    }
-
-    @FXML
     void showShopMenu() {
         disableAllMenuPanes();
         clearFront();
@@ -670,6 +731,17 @@ public class Controller extends Admin implements Initializable {
     }
 
     @FXML
+    void showGamesMenu(){
+        disableAllMenuPanes();
+        clearFront();
+        ableAllButtons();
+
+        settingsRectFront.setVisible(true);
+        gamesMenu.setVisible(true);
+        gamesMenu.setDisable(false);
+    }
+
+    @FXML
     void showProfMenu() {
         disableAllMenuPanes();
         clearFront();
@@ -694,6 +766,8 @@ public class Controller extends Admin implements Initializable {
         playersMenu.setDisable(true);
         chatMenu.setDisable(true);
         chatMenu.setVisible(false);
+        gamesMenu.setVisible(false);
+        gamesMenu.setDisable(true);
     }
 
     void ableAllButtons(){
@@ -701,7 +775,7 @@ public class Controller extends Admin implements Initializable {
         friendsMenuB.setDisable(false);
         profMenuB.setDisable(false);
         tasksMenuB.setDisable(false);
-        settingsMenuB.setDisable(false);
+        gamesMenuB.setDisable(false);
         shopMenuB.setDisable(false);
         homeMenuB.setDisable(false);
     }

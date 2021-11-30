@@ -22,7 +22,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <AnchorPane prefHeight="500.0" prefWidth="700.0">
          <children>
@@ -336,7 +336,7 @@
                </font>
             </Label>
             <Line endY="170.0" startX="170.0" startY="170.0" stroke="#434141" strokeWidth="2.0" />
-            <Label fx:id="timeLabel" alignment="CENTER" layoutX="620.0" prefHeight="30.0" prefWidth="80.0" text="01:58:45">
+            <Label fx:id="timeLabel" alignment="CENTER" layoutX="620.0" prefHeight="30.0" prefWidth="80.0" text="00:00:00">
                <font>
                   <Font size="18.0" />
                </font>
@@ -380,7 +380,7 @@
                </font>
             </Label>
             <Line endY="370.0" startX="170.0" startY="370.0" stroke="#434141" strokeWidth="2.0" />
-            <Label layoutX="53.0" layoutY="339.0" text="Settings">
+            <Label alignment="CENTER" layoutY="339.0" prefHeight="22.0" prefWidth="170.0" text="Games">
                <font>
                   <Font name="Eras Medium ITC" size="17.0" />
                </font>
@@ -498,17 +498,11 @@
                   <Font name="Verdana" size="18.0" />
                </font>
             </Label>
-            <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#fbfdff" height="146.0" layoutX="187.0" layoutY="303.0" stroke="BLACK" strokeType="INSIDE" width="495.0" />
-            <Button fx:id="refreshLeaderboardB" layoutX="650.0" layoutY="270.0" mnemonicParsing="false" onAction="#refreshPlayers" prefHeight="25.0" prefWidth="28.0" style="-fx-background-size: 0;" text="🔄">
+            <Button fx:id="refreshLeaderboardB" layoutX="650.0" layoutY="270.0" mnemonicParsing="false" onAction="#refreshLeaderboard" prefHeight="25.0" prefWidth="28.0" style="-fx-background-size: 0;" text="🔄">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Label layoutX="195.0" layoutY="323.0" prefHeight="17.0" prefWidth="172.0" text="1.Sakubek">
-               <font>
-                  <Font name="Verdana Italic" size="14.0" />
-               </font>
-            </Label>
             <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#747f86" height="200.0" layoutX="482.0" layoutY="50.0" stroke="BLACK" strokeType="INSIDE" width="211.0" />
             <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#fbfdff" height="136.0" layoutX="496.0" layoutY="101.0" stroke="BLACK" strokeType="INSIDE" width="186.0" />
             <TextField fx:id="searchPlayerNicknameTF" layoutX="496.0" layoutY="66.0" promptText="Player's nickname" />
@@ -518,7 +512,6 @@
                </cursor>
             </Button>
             <Label layoutX="620.0" layoutY="107.0" text="Results(1) : " />
-            <Line endY="138.0" layoutX="370.0" layoutY="303.0" startY="4.0" />
             <ScrollPane fx:id="onlinePlayersSPane" hbarPolicy="NEVER" layoutX="195.0" layoutY="91.0" prefHeight="136.0" prefWidth="253.0">
               <content>
                 <AnchorPane fx:id="onlinePlayersAPane" minHeight="0.0" minWidth="0.0" prefHeight="130.0" prefWidth="255.0">
@@ -529,32 +522,13 @@
                   </AnchorPane>
               </content>
             </ScrollPane>
-            <Label alignment="CENTER" layoutX="496.0" layoutY="324.0" prefHeight="17.0" prefWidth="179.0" text="INTERGALACTIC MARSHALL" textFill="#6f0505">
-               <font>
-                  <Font name="Verdana Italic" size="12.0" />
-               </font>
-            </Label>
-            <Label alignment="CENTER" layoutX="347.0" layoutY="323.0" prefHeight="18.0" prefWidth="156.0" text="215 level">
-               <font>
-                  <Font name="Verdana Italic" size="14.0" />
-               </font>
-            </Label>
+            <ScrollPane hbarPolicy="NEVER" layoutX="187.0" layoutY="307.0" prefHeight="136.0" prefWidth="500.0">
+              <content>
+                <AnchorPane fx:id="leaderboardContent" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+              </content>
+            </ScrollPane>
             <Line endY="138.0" layoutX="479.0" layoutY="303.0" startY="4.0" />
-            <Label layoutX="193.0" layoutY="350.0" prefHeight="17.0" prefWidth="172.0" text="2.Marcus">
-               <font>
-                  <Font name="Verdana Italic" size="14.0" />
-               </font>
-            </Label>
-            <Label alignment="CENTER" layoutX="498.0" layoutY="351.0" prefHeight="17.0" prefWidth="179.0" text="Joker" textFill="#6022a1">
-               <font>
-                  <Font name="Verdana Italic" size="12.0" />
-               </font>
-            </Label>
-            <Label alignment="CENTER" layoutX="345.0" layoutY="350.0" prefHeight="18.0" prefWidth="156.0" text="81 level">
-               <font>
-                  <Font name="Verdana Italic" size="14.0" />
-               </font>
-            </Label>
+            <Line endY="138.0" layoutX="370.0" layoutY="303.0" startY="4.0" />
             <Label layoutX="224.0" layoutY="286.0" prefHeight="17.0" prefWidth="111.0" text="Player name:" textFill="WHITE">
                <font>
                   <Font name="Verdana Italic" size="14.0" />
@@ -565,9 +539,14 @@
                   <Font name="Verdana Italic" size="14.0" />
                </font>
             </Label>
+            <Label alignment="CENTER" layoutX="519.0" layoutY="286.0" prefHeight="17.0" prefWidth="111.0" text="Title:" textFill="WHITE">
+               <font>
+                  <Font name="Verdana Italic" size="14.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="chatMenu" prefHeight="500.0" prefWidth="700.0">
+      <AnchorPane fx:id="chatMenu" disable="true" prefHeight="500.0" prefWidth="700.0" visible="false">
          <children>
             <Rectangle height="460.0" layoutX="170.0" layoutY="40.0" stroke="BLACK" strokeType="INSIDE" width="530.0">
                <fill>
@@ -797,6 +776,34 @@
             </Label>
          </children>
       </AnchorPane>
+      <AnchorPane fx:id="gamesMenu" prefHeight="500.0" prefWidth="700.0">
+         <children>
+            <Rectangle height="460.0" layoutX="171.0" layoutY="42.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="530.0">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.5952000021934509" green="0.7715520858764648" blue="0.9300000071525574" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Rectangle>
+            <Button layoutX="238.0" layoutY="178.0" mnemonicParsing="false" text="Online Tic Tac Toe" />
+            <Button layoutX="460.0" layoutY="178.0" mnemonicParsing="false" text="Online Rock-Paper-Scissors" />
+            <Button layoutX="253.0" layoutY="336.0" mnemonicParsing="false" text="Online Dices" />
+            <Button layoutX="481.0" layoutY="342.0" mnemonicParsing="false" text="Squid game parody" />
+            <Button layoutX="252.0" layoutY="260.0" mnemonicParsing="false" text="Offline " />
+            <Button layoutX="502.0" layoutY="260.0" mnemonicParsing="false" text="Ruletka" />
+         </children>
+      </AnchorPane>
       <AnchorPane fx:id="adminMenu" disable="true" layoutX="170.0" layoutY="40.0" prefHeight="80.0" prefWidth="530.0" visible="false">
          <children>
             <Rectangle fill="#726e6e" height="80.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="530.0" />
@@ -844,7 +851,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="settingsMenuB" layoutY="330.0" mnemonicParsing="false" onAction="#showSettingsMenu" opacity="0.0" prefHeight="40.0" prefWidth="170.0">
+      <Button fx:id="gamesMenuB" layoutY="330.0" mnemonicParsing="false" onAction="#showGamesMenu" opacity="0.0" prefHeight="40.0" prefWidth="170.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
