@@ -11,7 +11,6 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
         primaryStage.setTitle("MSTable");
-        primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(root, 700, 500));
         primaryStage.show();
     }

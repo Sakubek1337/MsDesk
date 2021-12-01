@@ -46,7 +46,7 @@ public class Login extends Postgre implements Initializable {
     Rectangle versionErrorRect;
     @FXML
     Label versionErrorLabel;
-    String version = "v0.3.5";
+    String version = "v0.3.6";
 
     @FXML
     void signIn() throws SQLException {

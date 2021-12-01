@@ -431,7 +431,7 @@ public class Controller extends Admin implements Initializable {
         msgN = messages.size();
         if(messages.size() > 0){
             temp = 0;
-            Timeline msgTML = new Timeline(new KeyFrame(Duration.millis(100), e -> {
+            Timeline msgTML = new Timeline(new KeyFrame(Duration.millis(40), e -> {
                 String sender = messages.get(temp).get(0);
                 Rectangle rect = new Rectangle();
                 Label label = new Label();

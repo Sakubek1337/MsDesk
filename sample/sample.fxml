@@ -22,7 +22,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <AnchorPane prefHeight="500.0" prefWidth="700.0">
          <children>
@@ -33,12 +33,12 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color red="0.46722710132598877" green="0.667712390422821" blue="0.8552631735801697" />
+                              <Color blue="0.8552631735801697" green="0.667712390422821" red="0.46722710132598877" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
+                              <Color blue="1.0" green="1.0" red="1.0" />
                            </color>
                         </Stop>
                      </stops>
@@ -52,12 +52,12 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color red="0.12156862765550613" green="0.6784313917160034" blue="1.0" />
+                              <Color blue="1.0" green="0.6784313917160034" red="0.12156862765550613" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
+                              <Color blue="1.0" green="1.0" red="1.0" />
                            </color>
                         </Stop>
                      </stops>
@@ -70,12 +70,12 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color red="0.12156862765550613" green="0.6784313917160034" blue="1.0" />
+                              <Color blue="1.0" green="0.6784313917160034" red="0.12156862765550613" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
+                              <Color blue="1.0" green="1.0" red="1.0" />
                            </color>
                         </Stop>
                      </stops>
@@ -94,12 +94,12 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color red="0.12999999523162842" green="1.0" blue="0.5458467602729797" />
+                              <Color blue="0.5458467602729797" green="1.0" red="0.12999999523162842" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
+                              <Color blue="1.0" green="1.0" red="1.0" />
                            </color>
                         </Stop>
                      </stops>
@@ -112,12 +112,12 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color red="0.12156862765550613" green="0.6784313917160034" blue="1.0" />
+                              <Color blue="1.0" green="0.6784313917160034" red="0.12156862765550613" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
+                              <Color blue="1.0" green="1.0" red="1.0" />
                            </color>
                         </Stop>
                      </stops>
@@ -130,12 +130,12 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color red="0.12156862765550613" green="0.6784313917160034" blue="1.0" />
+                              <Color blue="1.0" green="0.6784313917160034" red="0.12156862765550613" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
+                              <Color blue="1.0" green="1.0" red="1.0" />
                            </color>
                         </Stop>
                      </stops>
@@ -148,12 +148,12 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color red="0.12156862765550613" green="0.6784313917160034" blue="1.0" />
+                              <Color blue="1.0" green="0.6784313917160034" red="0.12156862765550613" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
+                              <Color blue="1.0" green="1.0" red="1.0" />
                            </color>
                         </Stop>
                      </stops>
@@ -166,12 +166,12 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color red="0.12999999523162842" green="1.0" blue="0.5458467602729797" />
+                              <Color blue="0.5458467602729797" green="1.0" red="0.12999999523162842" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
+                              <Color blue="1.0" green="1.0" red="1.0" />
                            </color>
                         </Stop>
                      </stops>
@@ -184,12 +184,12 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color red="0.12999999523162842" green="1.0" blue="0.5458467602729797" />
+                              <Color blue="0.5458467602729797" green="1.0" red="0.12999999523162842" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
+                              <Color blue="1.0" green="1.0" red="1.0" />
                            </color>
                         </Stop>
                      </stops>
@@ -202,12 +202,12 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color red="0.12999999523162842" green="1.0" blue="0.5458467602729797" />
+                              <Color blue="0.5458467602729797" green="1.0" red="0.12999999523162842" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
+                              <Color blue="1.0" green="1.0" red="1.0" />
                            </color>
                         </Stop>
                      </stops>
@@ -220,12 +220,12 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color red="0.12156862765550613" green="0.6784313917160034" blue="1.0" />
+                              <Color blue="1.0" green="0.6784313917160034" red="0.12156862765550613" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
+                              <Color blue="1.0" green="1.0" red="1.0" />
                            </color>
                         </Stop>
                      </stops>
@@ -238,12 +238,12 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color red="0.12999999523162842" green="1.0" blue="0.5458467602729797" />
+                              <Color blue="0.5458467602729797" green="1.0" red="0.12999999523162842" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
+                              <Color blue="1.0" green="1.0" red="1.0" />
                            </color>
                         </Stop>
                      </stops>
@@ -256,12 +256,12 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color red="0.12156862765550613" green="0.6784313917160034" blue="1.0" />
+                              <Color blue="1.0" green="0.6784313917160034" red="0.12156862765550613" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
+                              <Color blue="1.0" green="1.0" red="1.0" />
                            </color>
                         </Stop>
                      </stops>
@@ -274,12 +274,12 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color red="0.12999999523162842" green="1.0" blue="0.5458467602729797" />
+                              <Color blue="0.5458467602729797" green="1.0" red="0.12999999523162842" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
+                              <Color blue="1.0" green="1.0" red="1.0" />
                            </color>
                         </Stop>
                      </stops>
@@ -292,17 +292,17 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color red="0.8815789222717285" green="0.7236974239349365" blue="0.020406920462846756" />
+                              <Color blue="0.020406920462846756" green="0.7236974239349365" red="0.8815789222717285" />
                            </color>
                         </Stop>
                         <Stop offset="0.007662835249042145">
                            <color>
-                              <Color red="0.8815789222717285" green="0.7236974239349365" blue="0.020406920462846756" />
+                              <Color blue="0.020406920462846756" green="0.7236974239349365" red="0.8815789222717285" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
+                              <Color blue="1.0" green="1.0" red="1.0" />
                            </color>
                         </Stop>
                      </stops>
@@ -315,12 +315,12 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color red="0.12999999523162842" green="1.0" blue="0.5458467602729797" />
+                              <Color blue="0.5458467602729797" green="1.0" red="0.12999999523162842" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
+                              <Color blue="1.0" green="1.0" red="1.0" />
                            </color>
                         </Stop>
                      </stops>
@@ -421,7 +421,7 @@
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
             </ScrollPane>
-            <Button layoutX="450.0" layoutY="52.0" mnemonicParsing="false" onAction="#add" text="Add task">
+            <Button disable="true" layoutX="450.0" layoutY="52.0" mnemonicParsing="false" onAction="#add" text="Add task">
                <font>
                   <Font size="11.0" />
                </font>
@@ -435,7 +435,7 @@
                </cursor></TextField>
             <ColorPicker fx:id="color_picker" editable="true" layoutX="15.0" layoutY="52.0" prefHeight="25.0" prefWidth="52.0">
                <value>
-                  <Color red="0.9473684430122375" green="0.23245614767074585" blue="0.23245614767074585" />
+                  <Color blue="0.23245614767074585" green="0.23245614767074585" red="0.9473684430122375" />
                </value>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -466,12 +466,12 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
+                              <Color blue="1.0" green="1.0" red="1.0" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color red="0.6324317455291748" green="0.7108674645423889" blue="0.7631579041481018" />
+                              <Color blue="0.7631579041481018" green="0.7108674645423889" red="0.6324317455291748" />
                            </color>
                         </Stop>
                      </stops>
@@ -514,7 +514,7 @@
             <Label layoutX="620.0" layoutY="107.0" text="Results(1) : " />
             <ScrollPane fx:id="onlinePlayersSPane" hbarPolicy="NEVER" layoutX="195.0" layoutY="91.0" prefHeight="136.0" prefWidth="253.0">
               <content>
-                <AnchorPane fx:id="onlinePlayersAPane" minHeight="0.0" minWidth="0.0" prefHeight="130.0" prefWidth="255.0">
+                <AnchorPane fx:id="onlinePlayersAPane" minHeight="0.0" minWidth="0.0" prefWidth="255.0">
                      <children>
                         <Circle fill="#40ff00" layoutX="13.0" layoutY="17.0" radius="3.0" stroke="BLACK" strokeType="INSIDE" />
                         <Circle fill="#40ff00" layoutX="13.0" layoutY="34.0" radius="3.0" stroke="BLACK" strokeType="INSIDE" />
@@ -524,7 +524,7 @@
             </ScrollPane>
             <ScrollPane hbarPolicy="NEVER" layoutX="187.0" layoutY="307.0" prefHeight="136.0" prefWidth="500.0">
               <content>
-                <AnchorPane fx:id="leaderboardContent" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                <AnchorPane fx:id="leaderboardContent" minHeight="0.0" minWidth="0.0" prefWidth="200.0" />
               </content>
             </ScrollPane>
             <Line endY="138.0" layoutX="479.0" layoutY="303.0" startY="4.0" />
@@ -554,12 +554,12 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
+                              <Color blue="1.0" green="1.0" red="1.0" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color red="0.25" green="0.699999988079071" blue="1.0" />
+                              <Color blue="1.0" green="0.699999988079071" red="0.25" />
                            </color>
                         </Stop>
                      </stops>
@@ -572,17 +572,17 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color red="0.7167397737503052" green="0.9736841917037964" blue="0.7509990334510803" />
+                              <Color blue="0.7509990334510803" green="0.9736841917037964" red="0.7167397737503052" />
                            </color>
                         </Stop>
                         <Stop offset="0.4904214559386973">
                            <color>
-                              <Color red="0.6312134265899658" green="0.7853983640670776" blue="0.8684210777282715" />
+                              <Color blue="0.8684210777282715" green="0.7853983640670776" red="0.6312134265899658" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color red="0.6274510025978088" green="0.7529411911964417" blue="0.9333333373069763" />
+                              <Color blue="0.9333333373069763" green="0.7529411911964417" red="0.6274510025978088" />
                            </color>
                         </Stop>
                      </stops>
@@ -609,17 +609,17 @@
                                  <stops>
                                     <Stop>
                                        <color>
-                                          <Color red="0.7176470756530762" green="0.9725490212440491" blue="0.7529411911964417" />
+                                          <Color blue="0.7529411911964417" green="0.9725490212440491" red="0.7176470756530762" />
                                        </color>
                                     </Stop>
                                     <Stop offset="0.4904214559386973">
                                        <color>
-                                          <Color red="0.6312134265899658" green="0.7853983640670776" blue="0.8684210777282715" />
+                                          <Color blue="0.8684210777282715" green="0.7853983640670776" red="0.6312134265899658" />
                                        </color>
                                     </Stop>
                                     <Stop offset="1.0">
                                        <color>
-                                          <Color red="0.6274510025978088" green="0.7529411911964417" blue="0.9333333373069763" />
+                                          <Color blue="0.9333333373069763" green="0.7529411911964417" red="0.6274510025978088" />
                                        </color>
                                     </Stop>
                                  </stops>
@@ -641,12 +641,12 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color red="0.11999999731779099" green="1.0" blue="0.19514413177967072" />
+                              <Color blue="0.19514413177967072" green="1.0" red="0.11999999731779099" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color red="0.2554151713848114" green="0.25" blue="1.0" />
+                              <Color blue="1.0" green="0.25" red="0.2554151713848114" />
                            </color>
                         </Stop>
                      </stops>
@@ -661,17 +661,17 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color red="0.7167397737503052" green="0.9736841917037964" blue="0.7509990334510803" />
+                              <Color blue="0.7509990334510803" green="0.9736841917037964" red="0.7167397737503052" />
                            </color>
                         </Stop>
                         <Stop offset="0.4904214559386973">
                            <color>
-                              <Color red="0.6312134265899658" green="0.7853983640670776" blue="0.8684210777282715" />
+                              <Color blue="0.8684210777282715" green="0.7853983640670776" red="0.6312134265899658" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color red="0.6274510025978088" green="0.7529411911964417" blue="0.9333333373069763" />
+                              <Color blue="0.9333333373069763" green="0.7529411911964417" red="0.6274510025978088" />
                            </color>
                         </Stop>
                      </stops>
@@ -694,12 +694,12 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color red="0.5231481194496155" green="1.0" blue="0.6741512417793274" />
+                              <Color blue="0.6741512417793274" green="1.0" red="0.5231481194496155" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color red="0.48471003770828247" green="0.48471003770828247" blue="0.9605262875556946" />
+                              <Color blue="0.9605262875556946" green="0.48471003770828247" red="0.48471003770828247" />
                            </color>
                         </Stop>
                      </stops>
@@ -718,12 +718,12 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color red="0.11999999731779099" green="1.0" blue="0.19514413177967072" />
+                              <Color blue="0.19514413177967072" green="1.0" red="0.11999999731779099" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color red="0.2554151713848114" green="0.25" blue="1.0" />
+                              <Color blue="1.0" green="0.25" red="0.2554151713848114" />
                            </color>
                         </Stop>
                      </stops>
@@ -736,12 +736,12 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color red="0.11999999731779099" green="1.0" blue="0.19514413177967072" />
+                              <Color blue="0.19514413177967072" green="1.0" red="0.11999999731779099" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color red="0.2554151713848114" green="0.25" blue="1.0" />
+                              <Color blue="1.0" green="0.25" red="0.2554151713848114" />
                            </color>
                         </Stop>
                      </stops>
@@ -754,12 +754,12 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color red="0.11999999731779099" green="1.0" blue="0.19514413177967072" />
+                              <Color blue="0.19514413177967072" green="1.0" red="0.11999999731779099" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color red="0.2554151713848114" green="0.25" blue="1.0" />
+                              <Color blue="1.0" green="0.25" red="0.2554151713848114" />
                            </color>
                         </Stop>
                      </stops>
@@ -784,12 +784,12 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
+                              <Color blue="1.0" green="1.0" red="1.0" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color red="0.5952000021934509" green="0.7715520858764648" blue="0.9300000071525574" />
+                              <Color blue="0.9300000071525574" green="0.7715520858764648" red="0.5952000021934509" />
                            </color>
                         </Stop>
                      </stops>

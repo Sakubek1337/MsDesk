@@ -4,9 +4,9 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class Postgre{
-    protected String jdbcURL = "jdbc:posr529vc82";
-    protected String username = "ncx2d";
-    protected String password = "9580b3732f802";
+    protected String jdbcURL = "";
+    protected String username = "nc";
+    protected String password = "95";
 
     Connection connection;
 
@@ -347,7 +347,8 @@ public class Postgre{
         if (connection == null)
             connection = DriverManager.getConnection(jdbcURL, username, password);
         System.out.println("Connected to Postgresql server successfully");
-        String inserting = "INSERT INTO users(nick, password, title, is_online, rank) VALUES ('" + nickname + "','" + pass + "', '', 0, 'Adventurer')";
+        String inserting = "INSERT INTO users(nick, password, title, is_online, rank, score) VALUES ('" +
+                nickname + "','" + pass + "', '', 0, 'Adventurer', 0)";
         Statement statement = connection.createStatement();
         statement.executeUpdate(inserting);
     }
