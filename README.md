@@ -19,6 +19,8 @@ Database - PostgreSQL (hosted on heroku.com). <br>
 Latest release - 0.4.1 (Check out in releases' section). <br>
 Done for - OOP course's final project (Autumn 2021) .
 
+## If you want to know how to do it, check out the tutorial! :) 
+
 Here is the screenshots of the app and its tables in Database:<br>
 #### Screenshot 1:<br>
 ![Screenshot 1](https://github.com/Sakubek1337/MsDesk/blob/main/screenshots/sc2.PNG)<br>
