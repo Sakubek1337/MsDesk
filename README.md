@@ -16,6 +16,7 @@ Other info:<br>
 Java version - 8.<br>
 GUI - JavaFX .<bR>
 Database - PostgreSQL (hosted on heroku.com). <br>
+Latest release - 0.4.1 (Check out in releases' section). <br>
 Done for - OOP course's final project (Autumn 2021) .
 
 Here is the screenshots of the app and its tables in Database:<br>
