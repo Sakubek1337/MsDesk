@@ -1,0 +1,31 @@
+Want to do your own messenger and to-do list?
+Well in order to understand this tutorial you need to know the basics of Java, JavaFX and PostgreSQL. 
+If you are complete beginner then unfortunately I have to say sorry. Make sure to learn the basics and come to this tutorial again.
+With this all being said, lets get started!
+1.You need to install all the neccessary tools.
+Such as: Intellij Idea, SceneBuilder, PostgreSQL(for messenger), postgresql-jdbc.jar(for messenger).
+2.Then you need to find a webserver to host your database. Heroku will be a great choice. 
+3.Then you need to create tables: users(look at screenshots for values), messages(), chats.
+4.After, you should create empty project in intellij.
+In this folder you should have java files to controll fxml file and handle PostreSQL queries.
+5.Lets start coding.
+Add to your opening fxml page textfields so user can enter his username and password.
+Then add button to submit it and change stage's scene to the next one where we will have our messenger.
+But before changing scene we need to be sure that user is in the database and if not to add him to db.
+For this we need PSQL queries that will take user's nickname and password and compare them with all existing users.
+If it wont find any matches , then we need to make it to add row to our table(users) in db.
+And only then we can move on to the next scene.
+Here we need to our messenger. At first add a section (scroll pane recommended) where all the chats with current user will be displayed.
+You can achieve it by getting all chats (from db) with our user and adding them one by one as a clickable button.
+Then you need to add button so user can create chat with other users. You should achieve it by adding chat by current user's and second user's
+nickname to our table (chats).
+After this make a second display chosen chat. To actually display it I would recommend you to use timeline to iterate through messages which we 
+will get from our db (SELECT * FROM messages WHERE chat_id = <<current_chat_id>>; Table "chats" => (chat_id, nickname1, nickname2)) and add them
+as a rectangles with labels(message's text) inside them. 
+To send messages we need textfield and psql query to insert our message into table "messages".
+Then we need to make a listener, so it will update every time when new messages is added to our current chat.
+We can make it with timeline and write a function so when messages' number in our chat and messages' number in db will differ,
+it will add and display new messages in our app.
+At this point, our messenger is finished. 
+For to-do list, I think it is easy enough in order to you to understand it by just looking at the code (look at controller.java). 
+That's it for this tutorial. I hope I could explain it good enough. Thanks for reading it. Peace!
