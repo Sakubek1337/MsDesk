@@ -1,7 +1,7 @@
 # MSDesk
 ### From Mambetkadyrov S.
 
-This is a desktop application which has its own To-Do list and chatting feature between users. <br>
+This is a desktop application which has its own To-Do list and chatting feature between users . <br>
 At first, you need to register/login (Screenshot 1) .<br>
 After logging in you will find yourself on the main page of the app (Screenshot 2) .<br> 
 Here you can use its: <br> 
@@ -10,7 +10,7 @@ Which gives you points after finishing every task according to its difficulty wh
 ### - Players section and leaderboard  
 To see who is online and how many points do all of the users have; <br>
 ### - Chatting 
-To exchange messages with other users. <br>
+To exchange messages with other users (Done via Postgre). <br>
 
 Other info:<br>
 Java version - 8.<br>
