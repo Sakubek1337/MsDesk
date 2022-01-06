@@ -4,9 +4,9 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class Postgre{
-    protected String jdbcURL = "";
-    protected String username = "nc";
-    protected String password = "95";
+    protected String jdbcURL = "jdbc:postgresql://hostname:port/databasename";
+    protected String username = "username";
+    protected String password = "password";
 
     Connection connection;
 
@@ -44,7 +44,6 @@ public class Postgre{
     public void addChat(String nickname1, String nickname2) throws SQLException {
         if (connection == null)
             connection = DriverManager.getConnection(jdbcURL, username, password);
-        System.out.println("Connected to Postgresql server successfully");
         String inserting= "INSERT INTO chats(nick1, nick2) VALUES ('" + nickname1 + "', '" + nickname2 + "')";
         Statement statement = connection.createStatement();
         statement.executeUpdate(inserting);
@@ -243,7 +242,6 @@ public class Postgre{
     public void addMessage(String sender, int chat_id, String msg) throws SQLException {
         if (connection == null)
             connection = DriverManager.getConnection(jdbcURL, username, password);
-        System.out.println("Connected to Postgresql server successfully");
         String inserting= "INSERT INTO messages(msg_text, chat_id, sender_nick) VALUES ('" +
                 msg + "', " + chat_id + ", '" + sender + "')";
         Statement statement = connection.createStatement();

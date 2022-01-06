@@ -22,7 +22,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <AnchorPane prefHeight="500.0" prefWidth="700.0">
          <children>
@@ -33,12 +33,12 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color blue="0.8552631735801697" green="0.667712390422821" red="0.46722710132598877" />
+                              <Color red="0.46722710132598877" green="0.667712390422821" blue="0.8552631735801697" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color blue="1.0" green="1.0" red="1.0" />
+                              <Color red="1.0" green="1.0" blue="1.0" />
                            </color>
                         </Stop>
                      </stops>
@@ -52,12 +52,12 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color blue="1.0" green="0.6784313917160034" red="0.12156862765550613" />
+                              <Color red="0.12156862765550613" green="0.6784313917160034" blue="1.0" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color blue="1.0" green="1.0" red="1.0" />
+                              <Color red="1.0" green="1.0" blue="1.0" />
                            </color>
                         </Stop>
                      </stops>
@@ -70,12 +70,12 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color blue="1.0" green="0.6784313917160034" red="0.12156862765550613" />
+                              <Color red="0.12156862765550613" green="0.6784313917160034" blue="1.0" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color blue="1.0" green="1.0" red="1.0" />
+                              <Color red="1.0" green="1.0" blue="1.0" />
                            </color>
                         </Stop>
                      </stops>
@@ -94,233 +94,84 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color blue="0.5458467602729797" green="1.0" red="0.12999999523162842" />
+                              <Color red="0.12999999523162842" green="1.0" blue="0.5458467602729797" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color blue="1.0" green="1.0" red="1.0" />
+                              <Color red="1.0" green="1.0" blue="1.0" />
                            </color>
                         </Stop>
                      </stops>
                   </LinearGradient>
                </fill>
             </Rectangle>
-            <Rectangle fx:id="tasksRect" height="40.0" layoutY="210.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="170.0">
+            <Rectangle fx:id="tasksRect" height="40.0" layoutY="240.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="170.0">
                <fill>
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
                         <Stop>
                            <color>
-                              <Color blue="1.0" green="0.6784313917160034" red="0.12156862765550613" />
+                              <Color red="0.12156862765550613" green="0.6784313917160034" blue="1.0" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color blue="1.0" green="1.0" red="1.0" />
+                              <Color red="1.0" green="1.0" blue="1.0" />
                            </color>
                         </Stop>
                      </stops>
                   </LinearGradient>
                </fill>
             </Rectangle>
-            <Rectangle fx:id="friendsRect" height="40.0" layoutY="250.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="170.0">
+            <Rectangle fx:id="friendsRect" height="40.0" layoutY="310.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="170.0">
                <fill>
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
                         <Stop>
                            <color>
-                              <Color blue="1.0" green="0.6784313917160034" red="0.12156862765550613" />
+                              <Color red="0.12156862765550613" green="0.6784313917160034" blue="1.0" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color blue="1.0" green="1.0" red="1.0" />
+                              <Color red="1.0" green="1.0" blue="1.0" />
                            </color>
                         </Stop>
                      </stops>
                   </LinearGradient>
                </fill>
             </Rectangle>
-            <Rectangle fx:id="profRect" height="40.0" layoutY="290.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="170.0">
+            <Rectangle fx:id="tasksRectFront" height="40.0" layoutX="1.0" layoutY="240.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="170.0">
                <fill>
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
                         <Stop>
                            <color>
-                              <Color blue="1.0" green="0.6784313917160034" red="0.12156862765550613" />
+                              <Color red="0.12999999523162842" green="1.0" blue="0.5458467602729797" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color blue="1.0" green="1.0" red="1.0" />
+                              <Color red="1.0" green="1.0" blue="1.0" />
                            </color>
                         </Stop>
                      </stops>
                   </LinearGradient>
                </fill>
             </Rectangle>
-            <Rectangle fx:id="tasksRectFront" height="40.0" layoutX="1.0" layoutY="210.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="170.0">
+            <Rectangle fx:id="friendsRectFront" height="40.0" layoutX="-1.0" layoutY="310.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="170.0">
                <fill>
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
                         <Stop>
                            <color>
-                              <Color blue="0.5458467602729797" green="1.0" red="0.12999999523162842" />
+                              <Color red="0.12999999523162842" green="1.0" blue="0.5458467602729797" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color blue="1.0" green="1.0" red="1.0" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </fill>
-            </Rectangle>
-            <Rectangle fx:id="friendsRectFront" height="40.0" layoutX="-1.0" layoutY="250.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="170.0">
-               <fill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color blue="0.5458467602729797" green="1.0" red="0.12999999523162842" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color blue="1.0" green="1.0" red="1.0" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </fill>
-            </Rectangle>
-            <Rectangle fx:id="profRectFront" height="40.0" layoutY="290.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="170.0">
-               <fill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color blue="0.5458467602729797" green="1.0" red="0.12999999523162842" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color blue="1.0" green="1.0" red="1.0" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </fill>
-            </Rectangle>
-            <Rectangle fx:id="settingsRect" height="40.0" layoutY="330.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="170.0">
-               <fill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color blue="1.0" green="0.6784313917160034" red="0.12156862765550613" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color blue="1.0" green="1.0" red="1.0" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </fill>
-            </Rectangle>
-            <Rectangle fx:id="settingsRectFront" height="40.0" layoutY="330.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="170.0">
-               <fill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color blue="0.5458467602729797" green="1.0" red="0.12999999523162842" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color blue="1.0" green="1.0" red="1.0" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </fill>
-            </Rectangle>
-            <Rectangle fx:id="shopRect" height="40.0" layoutY="370.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="170.0">
-               <fill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color blue="1.0" green="0.6784313917160034" red="0.12156862765550613" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color blue="1.0" green="1.0" red="1.0" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </fill>
-            </Rectangle>
-            <Rectangle fx:id="shopRectFront" height="40.0" layoutY="370.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="170.0">
-               <fill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color blue="0.5458467602729797" green="1.0" red="0.12999999523162842" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color blue="1.0" green="1.0" red="1.0" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </fill>
-            </Rectangle>
-            <Rectangle fx:id="homeRect" height="40.0" layoutY="410.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="170.0">
-               <fill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color blue="0.020406920462846756" green="0.7236974239349365" red="0.8815789222717285" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.007662835249042145">
-                           <color>
-                              <Color blue="0.020406920462846756" green="0.7236974239349365" red="0.8815789222717285" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color blue="1.0" green="1.0" red="1.0" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </fill>
-            </Rectangle>
-            <Rectangle fx:id="homeRectFront" height="40.0" layoutY="410.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="170.0">
-               <fill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color blue="0.5458467602729797" green="1.0" red="0.12999999523162842" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color blue="1.0" green="1.0" red="1.0" />
+                              <Color red="1.0" green="1.0" blue="1.0" />
                            </color>
                         </Stop>
                      </stops>
@@ -361,38 +212,14 @@
                   <Font name="Eras Medium ITC" size="17.0" />
                </font>
             </Label>
-            <Line endY="250.0" startX="170.0" startY="250.0" stroke="#434141" strokeWidth="2.0" />
-            <Line endY="290.0" startX="170.0" startY="290.0" stroke="#434141" strokeWidth="2.0" />
-            <Line endY="330.0" startX="170.0" startY="330.0" stroke="#434141" strokeWidth="2.0" />
-            <Label layoutX="63.0" layoutY="219.0" text="Tasks">
+            <Line endY="250.0" layoutY="-10.0" startX="170.0" startY="250.0" stroke="#434141" strokeWidth="2.0" />
+            <Line endY="280.0" startX="170.0" startY="280.0" stroke="#434141" strokeWidth="2.0" />
+            <Label layoutX="63.0" layoutY="249.0" text="Tasks">
                <font>
                   <Font name="Eras Medium ITC" size="17.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="55.0" layoutY="259.0" prefHeight="22.0" prefWidth="53.0" text="Chat">
-               <font>
-                  <Font name="Eras Medium ITC" size="17.0" />
-               </font>
-            </Label>
-            <Label layoutX="59.0" layoutY="299.0" text="Profile">
-               <font>
-                  <Font name="Eras Medium ITC" size="17.0" />
-               </font>
-            </Label>
-            <Line endY="370.0" startX="170.0" startY="370.0" stroke="#434141" strokeWidth="2.0" />
-            <Label alignment="CENTER" layoutY="339.0" prefHeight="22.0" prefWidth="170.0" text="Games">
-               <font>
-                  <Font name="Eras Medium ITC" size="17.0" />
-               </font>
-            </Label>
-            <Label layoutX="63.0" layoutY="379.0" text="Shop">
-               <font>
-                  <Font name="Eras Medium ITC" size="17.0" />
-               </font>
-            </Label>
-            <Line endY="410.0" startX="170.0" startY="410.0" stroke="#434141" strokeWidth="2.0" />
-            <Line endY="450.0" startX="170.0" startY="450.0" stroke="#434141" strokeWidth="2.0" />
-            <Label layoutX="41.0" layoutY="419.0" text="Home page">
+            <Label alignment="CENTER" layoutX="55.0" layoutY="319.0" prefHeight="22.0" prefWidth="53.0" text="Chat">
                <font>
                   <Font name="Eras Medium ITC" size="17.0" />
                </font>
@@ -408,6 +235,8 @@
                   <Font name="System Italic" size="12.0" />
                </font>
             </Label>
+            <Line endY="280.0" layoutY="30.0" startX="170.0" startY="280.0" stroke="#434141" strokeWidth="2.0" />
+            <Line endY="280.0" layoutY="70.0" startX="170.0" startY="280.0" stroke="#434141" strokeWidth="2.0" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="tasksMenu" disable="true" layoutX="170.0" layoutY="30.0" prefHeight="470.0" prefWidth="530.0" visible="false">
@@ -421,7 +250,7 @@
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
             </ScrollPane>
-            <Button disable="true" layoutX="450.0" layoutY="52.0" mnemonicParsing="false" onAction="#add" text="Add task">
+            <Button disable="false" layoutX="450.0" layoutY="52.0" mnemonicParsing="false" onAction="#add" text="Add task">
                <font>
                   <Font size="11.0" />
                </font>
@@ -435,7 +264,7 @@
                </cursor></TextField>
             <ColorPicker fx:id="color_picker" editable="true" layoutX="15.0" layoutY="52.0" prefHeight="25.0" prefWidth="52.0">
                <value>
-                  <Color blue="0.23245614767074585" green="0.23245614767074585" red="0.9473684430122375" />
+                  <Color red="0.9473684430122375" green="0.23245614767074585" blue="0.23245614767074585" />
                </value>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -466,12 +295,12 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color blue="1.0" green="1.0" red="1.0" />
+                              <Color red="1.0" green="1.0" blue="1.0" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color blue="0.7631579041481018" green="0.7108674645423889" red="0.6324317455291748" />
+                              <Color red="0.6324317455291748" green="0.7108674645423889" blue="0.7631579041481018" />
                            </color>
                         </Stop>
                      </stops>
@@ -554,12 +383,12 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color blue="1.0" green="1.0" red="1.0" />
+                              <Color red="1.0" green="1.0" blue="1.0" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color blue="1.0" green="0.699999988079071" red="0.25" />
+                              <Color red="0.25" green="0.699999988079071" blue="1.0" />
                            </color>
                         </Stop>
                      </stops>
@@ -572,17 +401,17 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color blue="0.7509990334510803" green="0.9736841917037964" red="0.7167397737503052" />
+                              <Color red="0.7167397737503052" green="0.9736841917037964" blue="0.7509990334510803" />
                            </color>
                         </Stop>
                         <Stop offset="0.4904214559386973">
                            <color>
-                              <Color blue="0.8684210777282715" green="0.7853983640670776" red="0.6312134265899658" />
+                              <Color red="0.6312134265899658" green="0.7853983640670776" blue="0.8684210777282715" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color blue="0.9333333373069763" green="0.7529411911964417" red="0.6274510025978088" />
+                              <Color red="0.6274510025978088" green="0.7529411911964417" blue="0.9333333373069763" />
                            </color>
                         </Stop>
                      </stops>
@@ -609,17 +438,17 @@
                                  <stops>
                                     <Stop>
                                        <color>
-                                          <Color blue="0.7529411911964417" green="0.9725490212440491" red="0.7176470756530762" />
+                                          <Color red="0.7176470756530762" green="0.9725490212440491" blue="0.7529411911964417" />
                                        </color>
                                     </Stop>
                                     <Stop offset="0.4904214559386973">
                                        <color>
-                                          <Color blue="0.8684210777282715" green="0.7853983640670776" red="0.6312134265899658" />
+                                          <Color red="0.6312134265899658" green="0.7853983640670776" blue="0.8684210777282715" />
                                        </color>
                                     </Stop>
                                     <Stop offset="1.0">
                                        <color>
-                                          <Color blue="0.9333333373069763" green="0.7529411911964417" red="0.6274510025978088" />
+                                          <Color red="0.6274510025978088" green="0.7529411911964417" blue="0.9333333373069763" />
                                        </color>
                                     </Stop>
                                  </stops>
@@ -641,12 +470,12 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color blue="0.19514413177967072" green="1.0" red="0.11999999731779099" />
+                              <Color red="0.11999999731779099" green="1.0" blue="0.19514413177967072" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color blue="1.0" green="0.25" red="0.2554151713848114" />
+                              <Color red="0.2554151713848114" green="0.25" blue="1.0" />
                            </color>
                         </Stop>
                      </stops>
@@ -661,17 +490,17 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color blue="0.7509990334510803" green="0.9736841917037964" red="0.7167397737503052" />
+                              <Color red="0.7167397737503052" green="0.9736841917037964" blue="0.7509990334510803" />
                            </color>
                         </Stop>
                         <Stop offset="0.4904214559386973">
                            <color>
-                              <Color blue="0.8684210777282715" green="0.7853983640670776" red="0.6312134265899658" />
+                              <Color red="0.6312134265899658" green="0.7853983640670776" blue="0.8684210777282715" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color blue="0.9333333373069763" green="0.7529411911964417" red="0.6274510025978088" />
+                              <Color red="0.6274510025978088" green="0.7529411911964417" blue="0.9333333373069763" />
                            </color>
                         </Stop>
                      </stops>
@@ -694,12 +523,12 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color blue="0.6741512417793274" green="1.0" red="0.5231481194496155" />
+                              <Color red="0.5231481194496155" green="1.0" blue="0.6741512417793274" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color blue="0.9605262875556946" green="0.48471003770828247" red="0.48471003770828247" />
+                              <Color red="0.48471003770828247" green="0.48471003770828247" blue="0.9605262875556946" />
                            </color>
                         </Stop>
                      </stops>
@@ -718,12 +547,12 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color blue="0.19514413177967072" green="1.0" red="0.11999999731779099" />
+                              <Color red="0.11999999731779099" green="1.0" blue="0.19514413177967072" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color blue="1.0" green="0.25" red="0.2554151713848114" />
+                              <Color red="0.2554151713848114" green="0.25" blue="1.0" />
                            </color>
                         </Stop>
                      </stops>
@@ -736,12 +565,12 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color blue="0.19514413177967072" green="1.0" red="0.11999999731779099" />
+                              <Color red="0.11999999731779099" green="1.0" blue="0.19514413177967072" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color blue="1.0" green="0.25" red="0.2554151713848114" />
+                              <Color red="0.2554151713848114" green="0.25" blue="1.0" />
                            </color>
                         </Stop>
                      </stops>
@@ -754,12 +583,12 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color blue="0.19514413177967072" green="1.0" red="0.11999999731779099" />
+                              <Color red="0.11999999731779099" green="1.0" blue="0.19514413177967072" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color blue="1.0" green="0.25" red="0.2554151713848114" />
+                              <Color red="0.2554151713848114" green="0.25" blue="1.0" />
                            </color>
                         </Stop>
                      </stops>
@@ -774,34 +603,6 @@
                   <Font size="10.0" />
                </font>
             </Label>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="gamesMenu" prefHeight="500.0" prefWidth="700.0">
-         <children>
-            <Rectangle height="460.0" layoutX="171.0" layoutY="42.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="530.0">
-               <fill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color blue="1.0" green="1.0" red="1.0" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color blue="0.9300000071525574" green="0.7715520858764648" red="0.5952000021934509" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </fill>
-            </Rectangle>
-            <Button layoutX="238.0" layoutY="178.0" mnemonicParsing="false" text="Online Tic Tac Toe" />
-            <Button layoutX="460.0" layoutY="178.0" mnemonicParsing="false" text="Online Rock-Paper-Scissors" />
-            <Button layoutX="253.0" layoutY="336.0" mnemonicParsing="false" text="Online Dices" />
-            <Button layoutX="481.0" layoutY="342.0" mnemonicParsing="false" text="Squid game parody" />
-            <Button layoutX="252.0" layoutY="260.0" mnemonicParsing="false" text="Offline " />
-            <Button layoutX="502.0" layoutY="260.0" mnemonicParsing="false" text="Ruletka" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="adminMenu" disable="true" layoutX="170.0" layoutY="40.0" prefHeight="80.0" prefWidth="530.0" visible="false">
@@ -836,32 +637,12 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="tasksMenuB" layoutY="210.0" mnemonicParsing="false" onAction="#showTasksMenu" opacity="0.0" prefHeight="40.0" prefWidth="170.0">
+      <Button fx:id="tasksMenuB" layoutY="240.0" mnemonicParsing="false" onAction="#showTasksMenu" opacity="0.0" prefHeight="40.0" prefWidth="170.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="friendsMenuB" layoutY="250.0" mnemonicParsing="false" onAction="#showFriendsMenu" opacity="0.0" prefHeight="40.0" prefWidth="170.0">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button fx:id="profMenuB" layoutY="290.0" mnemonicParsing="false" onAction="#showProfMenu" opacity="0.0" prefHeight="40.0" prefWidth="170.0">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button fx:id="gamesMenuB" layoutY="330.0" mnemonicParsing="false" onAction="#showGamesMenu" opacity="0.0" prefHeight="40.0" prefWidth="170.0">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button fx:id="shopMenuB" layoutY="370.0" mnemonicParsing="false" onAction="#showShopMenu" opacity="0.0" prefHeight="40.0" prefWidth="170.0">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button fx:id="homeMenuB" layoutY="410.0" mnemonicParsing="false" onAction="#showHomeMenu" opacity="0.0" prefHeight="40.0" prefWidth="170.0">
+      <Button fx:id="friendsMenuB" layoutY="310.0" mnemonicParsing="false" onAction="#showFriendsMenu" opacity="0.0" prefHeight="40.0" prefWidth="170.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

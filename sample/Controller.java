@@ -35,6 +35,7 @@ public class Controller extends Admin implements Initializable {
     int currentChatID;
     int timer = 10;
     Rectangle chatBG;
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
 
     ArrayList<Rectangle> rects = new ArrayList<>();
     ArrayList<Button> buttons = new ArrayList<>();
@@ -45,19 +46,19 @@ public class Controller extends Admin implements Initializable {
     @FXML
     AnchorPane mainPane;
     @FXML
-    Rectangle playersRect, tasksRect, friendsRect, profRect, settingsRect, shopRect, homeRect, homeRectFront;
+    Rectangle playersRect, tasksRect, friendsRect;
     @FXML
-    Rectangle playersRectFront, tasksRectFront, friendsRectFront, profRectFront, settingsRectFront, shopRectFront;
+    Rectangle playersRectFront, tasksRectFront, friendsRectFront;
     @FXML
     Label timeLabel, lvlLabel, nickLabel, lengthLabel, profN, selectChatLabel, msgErrorLabel;
     @FXML
     Label titleLabel, titleLabel1, titleLabel2, selectedUser, selectedUserStatus, userNotFoundLabel;
     @FXML
-    AnchorPane adminMenu ,sqlMenu, playersMenu, tasksMenu, chatMenu, gamesMenu;
+    AnchorPane adminMenu ,sqlMenu, playersMenu, tasksMenu, chatMenu;
     @FXML
     Button adminMenuB, adminGiveAdminB, adminTakeAdminB, sendMsgB, refreshLeaderboardB;
     @FXML
-    Button playersMenuB, tasksMenuB, friendsMenuB, profMenuB, gamesMenuB, shopMenuB, homeMenuB;
+    Button playersMenuB, tasksMenuB, friendsMenuB;
     @FXML
     ProgressBar actPrg;
     @FXML
@@ -677,15 +678,6 @@ public class Controller extends Admin implements Initializable {
     }
 
     @FXML
-    void showShopMenu() {
-        disableAllMenuPanes();
-        clearFront();
-        ableAllButtons();
-        shopMenuB.setDisable(true);
-        shopRectFront.setVisible(true);
-    }
-
-    @FXML
     void showTasksMenu() {
         disableAllMenuPanes();
         clearFront();
@@ -709,15 +701,6 @@ public class Controller extends Admin implements Initializable {
     }
 
     @FXML
-    void showHomeMenu() {
-        disableAllMenuPanes();
-        clearFront();
-        ableAllButtons();
-        homeRectFront.setVisible(true);
-        homeMenuB.setDisable(true);
-    }
-
-    @FXML
     void showPlayersMenu() {
         disableAllMenuPanes();
         clearFront();
@@ -730,33 +713,10 @@ public class Controller extends Admin implements Initializable {
         playersMenuB.setDisable(true);
     }
 
-    @FXML
-    void showGamesMenu(){
-        disableAllMenuPanes();
-        clearFront();
-        ableAllButtons();
-
-        settingsRectFront.setVisible(true);
-        gamesMenu.setVisible(true);
-        gamesMenu.setDisable(false);
-    }
-
-    @FXML
-    void showProfMenu() {
-        disableAllMenuPanes();
-        clearFront();
-        ableAllButtons();
-        profRectFront.setVisible(true);
-    }
-
     void clearFront(){
         playersRectFront.setVisible(false);
         friendsRectFront.setVisible(false);
-        profRectFront.setVisible(false);
         tasksRectFront.setVisible(false);
-        settingsRectFront.setVisible(false);
-        shopRectFront.setVisible(false);
-        homeRectFront.setVisible(false);
     }
 
     void disableAllMenuPanes(){
@@ -766,18 +726,12 @@ public class Controller extends Admin implements Initializable {
         playersMenu.setDisable(true);
         chatMenu.setDisable(true);
         chatMenu.setVisible(false);
-        gamesMenu.setVisible(false);
-        gamesMenu.setDisable(true);
     }
 
     void ableAllButtons(){
         playersMenuB.setDisable(false);
         friendsMenuB.setDisable(false);
-        profMenuB.setDisable(false);
         tasksMenuB.setDisable(false);
-        gamesMenuB.setDisable(false);
-        shopMenuB.setDisable(false);
-        homeMenuB.setDisable(false);
     }
 
     void close() throws SQLException {
@@ -804,7 +758,7 @@ public class Controller extends Admin implements Initializable {
         }));
 
         Timeline tml = new Timeline(new KeyFrame(Duration.seconds(6), e -> {
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+
             LocalDateTime now = LocalDateTime.now();
             timeLabel.setText(dtf.format(now));
             timer--;

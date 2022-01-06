@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Login">
+<AnchorPane fx:id="mainPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Login">
    <children>
       <Rectangle height="500.0" stroke="BLACK" strokeType="INSIDE" width="700.0">
          <fill>
@@ -34,7 +34,7 @@
          </fill>
       </Rectangle>
       <Rectangle arcHeight="30.0" arcWidth="30.0" fill="#d9e0e8" height="200.0" layoutX="250.0" layoutY="150.0" stroke="#16757c" strokeType="INSIDE" strokeWidth="4.0" width="200.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="79.0" layoutX="192.0" layoutY="55.0" stroke="BLACK" strokeType="INSIDE" width="317.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="79.0" layoutX="186.0" layoutY="55.0" stroke="BLACK" strokeType="INSIDE" width="317.0" />
       <AnchorPane fx:id="errorPane" prefHeight="500.0" prefWidth="700.0" visible="false">
          <children>
             <Rectangle arcHeight="35.0" arcWidth="35.0" fill="#d9e0e8" height="71.0" layoutX="453.0" layoutY="195.0" stroke="#16757c" strokeType="INSIDE" strokeWidth="2.0" width="110.0" />
@@ -58,7 +58,7 @@
       <CheckBox fx:id="register" layoutX="314.0" layoutY="363.0" mnemonicParsing="false" onMouseClicked="#registering" text="Register" />
       <Button layoutX="322.0" layoutY="300.0" mnemonicParsing="false" onAction="#signIn" text="Log in" />
       <PasswordField fx:id="passField" layoutX="276.0" layoutY="256.0" onMouseClicked="#clearAll" />
-      <Label alignment="CENTER" layoutX="200.0" layoutY="55.0" text="MS Table">
+      <Label alignment="CENTER" layoutX="205.0" layoutY="55.0" text="MS Desk">
          <font>
             <Font name="Forte" size="71.0" />
          </font>
@@ -89,7 +89,7 @@
          </font>
       </Label>
       <TextField fx:id="registerPassField" layoutX="276.0" layoutY="256.0" onMouseClicked="#clearAll" visible="false" />
-      <AnchorPane disable="true" prefHeight="200.0" prefWidth="200.0">
+      <AnchorPane disable="true" prefHeight="200.0" prefWidth="200.0" visible="false">
          <children>
             <Rectangle fx:id="versionErrorRect" arcHeight="5.0" arcWidth="5.0" fill="#eeffde" height="500.0" stroke="BLACK" strokeType="INSIDE" width="700.0" />
             <Label fx:id="versionErrorLabel" alignment="CENTER" prefHeight="500.0" prefWidth="700.0" text="This is the old version of the App.&#10;Please download the latest one.&#10;Link: https://github.com/Sakubek1337/mstable/releases" textAlignment="CENTER">
