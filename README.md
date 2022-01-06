@@ -14,6 +14,7 @@ To exchange messages with other users. <br>
 
 Other info:<br>
 Java version - 8.<br>
+GUI - JavaFX .<bR>
 Database - PostgreSQL (hosted on heroku.com). <br>
 Done for - OOP course's final project (Autumn 2021) .
 
